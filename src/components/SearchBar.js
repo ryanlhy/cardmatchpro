@@ -12,8 +12,12 @@ export default function FreeSolo() {
     const dispatch = useDispatch();
     const [pokemonArray, setPokemonArray] = useState([]);
     const [input, setInput] = useState("");
-    const key = "0c2898dc-e40c-492a-a72b-9d9d77410bc8";
+    const [selectedDropDown, setSelectedDropDown] = useState('');
 
+    const key = "0c2898dc-e40c-492a-a72b-9d9d77410bc8";
+    console.log("selectedDropDown: " + selectedDropDown)
+    console.log("input: " + input)
+    
     // const keyWordFilter = (input) =>{
     //     const filter = input.replace(/[^a-zA-Z0-9]/g, "");
     //     return filter;
@@ -65,18 +69,18 @@ export default function FreeSolo() {
     return (
       <Container maxWidth="md">
 
-          <Stack spacing={200} mx='auto' sx={{ width: "70%", paddingTop: 5}} >
-          {/* <Autocomplete
-              id="free-solo-demo"
-              freeSolo
-              options={top100Films.map((option) => option.title)}
-              renderInput={(params) => <TextField {...params} label="freeSolo" />}
-          /> */}
+          <Stack spacing={2} mx='auto' sx={{ width: "70%", paddingTop: 5}} >
+          <div>dispatch: {selectedInput}</div>
           <Autocomplete
               freeSolo
               id="free-solo-2-demo"
               disableClearable
               options={pokemonArray.map((arr) => `${arr.name} ${arr.number}/${arr.set.printedTotal} ${arr.set.series} ${arr.set.name}`)}
+              onChange={(e, value) => {
+                // setInput(value);
+                setSelectedDropDown(value);
+                dispatch(searchInputValue(value));
+              }}
               renderInput={(params) => (
                   <TextField
                   {...params}
@@ -85,12 +89,7 @@ export default function FreeSolo() {
                       ...params.InputProps,
                       type: 'search',
                   }}
-                  onChange={(e, newValue) => {
-                    setInput(e.target.value);
-                    dispatch(searchInputValue(e.target.value));
-                    console.log(newValue)
-                  }}
-                  onClick={console.log("clicked")}
+                  onChange={(e) => setInput(e.target.value)}
                   />
                   )}
                   />
