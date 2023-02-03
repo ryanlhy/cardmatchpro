@@ -4,12 +4,20 @@ import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import Autocomplete from '@mui/material/Autocomplete';
 import { Card, Container } from '@material-ui/core';
+import { useSelector, useDispatch } from 'react-redux';
+import { searchInputValue } from '../store/searchSlice';
 
 export default function FreeSolo() {
+    const selectedInput = useSelector((state) => state.searchInput.inputValue);
+    const dispatch = useDispatch();
     const [pokemonArray, setPokemonArray] = useState([]);
     const [input, setInput] = useState("");
-    const [selectedInput, setSelectedInput] = useState("");
     const key = "0c2898dc-e40c-492a-a72b-9d9d77410bc8";
+
+    // const keyWordFilter = (input) =>{
+    //     const filter = input.replace(/[^a-zA-Z0-9]/g, "");
+    //     return filter;
+    // }
 
     const callTenCharizard = async () => {
         const urlSrc = `https://api.pokemontcg.io/v2/cards?q=name:charizard&pageSize=10&api_key=${key}`;
@@ -28,17 +36,18 @@ export default function FreeSolo() {
         // if dont return any pokemon, enter set name?
       };
     
-      const apiFunc = (urlSrc) => {
-        const fetchPromise = fetch(urlSrc);
-        //promise chaining
-        fetchPromise
-          .then((response) => response.json())
-          .then((data) => {
+      const apiFunc = async (urlSrc) => {
+        const tempArray = pokemonArray; // temp array to reset if error
+        try {
+          const response = await fetch(urlSrc);
+          const data = await response.json();
+          if (data.data.length !== 0) {
             setPokemonArray(data.data);
-          })
-          .catch((err) => {
-            console.log("Error: ", err);
-          });
+          }
+        } catch (err) {
+          console.log("Error: ", err);
+          setPokemonArray(tempArray);
+        }
       };
     
       useEffect(() => {
@@ -76,7 +85,11 @@ export default function FreeSolo() {
                       ...params.InputProps,
                       type: 'search',
                   }}
-                  onChange={(e) => setInput(e.target.value)}
+                  onChange={(e, newValue) => {
+                    setInput(e.target.value);
+                    dispatch(searchInputValue(e.target.value));
+                    console.log(newValue)
+                  }}
                   onClick={console.log("clicked")}
                   />
                   )}
