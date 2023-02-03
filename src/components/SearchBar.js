@@ -12,16 +12,9 @@ export default function FreeSolo() {
     const dispatch = useDispatch();
     const [pokemonArray, setPokemonArray] = useState([]);
     const [input, setInput] = useState("");
-    const [selectedDropDown, setSelectedDropDown] = useState('');
+    // const [selectedDropDown, setSelectedDropDown] = useState('');
 
     const key = "0c2898dc-e40c-492a-a72b-9d9d77410bc8";
-    console.log("selectedDropDown: " + selectedDropDown)
-    console.log("input: " + input)
-    
-    // const keyWordFilter = (input) =>{
-    //     const filter = input.replace(/[^a-zA-Z0-9]/g, "");
-    //     return filter;
-    // }
 
     const callTenCharizard = async () => {
         const urlSrc = `https://api.pokemontcg.io/v2/cards?q=name:charizard&pageSize=10&api_key=${key}`;
@@ -37,6 +30,7 @@ export default function FreeSolo() {
           const urlSrc = `https://api.pokemontcg.io/v2/cards?q=name:"*${input}*"&pageSize=${pageSize}&api_key=${key}`;
           apiFunc(urlSrc);
         }
+        // when a space is entered into search bar, add a * to the search query before the word
         // if dont return any pokemon, enter set name?
       };
     
@@ -56,15 +50,11 @@ export default function FreeSolo() {
     
       useEffect(() => {
         // check if empty array, dont procees with useEffect
-        console.log(pokemonArray);
-        console.log(input)
-        // if (pokemonArray !== []) {
-          if (input === "") {
-            callTenCharizard();
-          } else {
-            callApiSearch();
-          }
-        // }
+        if (input === "") {
+          callTenCharizard();
+        } else {
+          callApiSearch();
+        }
       }, [input]);
     return (
       <Container maxWidth="md">
@@ -76,10 +66,13 @@ export default function FreeSolo() {
               id="free-solo-2-demo"
               disableClearable
               options={pokemonArray.map((arr) => `${arr.name} ${arr.number}/${arr.set.printedTotal} ${arr.set.series} ${arr.set.name}`)}
-              onChange={(e, value) => {
+              onChange={(e, value, reason) => {
                 // setInput(value);
-                setSelectedDropDown(value);
+                // setSelectedDropDown(value);
                 dispatch(searchInputValue(value));
+                if (reason === 'selectOption') { // detect if an option is selected
+                  console.log('selected option');
+                }
               }}
               renderInput={(params) => (
                   <TextField
