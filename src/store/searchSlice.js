@@ -5,6 +5,7 @@ export const searchSlice = createSlice({
   initialState: {
     value: 0,
     inputValue: "",
+    inputObject: {}
   },
   reducers: {
     increment: state => {
@@ -18,6 +19,9 @@ export const searchSlice = createSlice({
     },
     searchInputValue: (state, action) => {
       state.inputValue = action.payload
+    },
+    searchInputObject: (state, action) => {
+      state.inputObject = action.payload
     }
   }
 })

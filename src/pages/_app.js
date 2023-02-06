@@ -64,9 +64,9 @@ function App(props) {
               size="medium"
               bgImage=""
               bgImageOpacity={1}
-              description="A short description of what you do here"
+              description="The Competitive Edge for Pokemon Card Ecommerce"
               copyright={`© ${new Date().getFullYear()} Company`}
-              logo="https://uploads.divjoy.com/logo.svg"
+              logo="https://zardslabs.com/wp-content/uploads/2022/03/Zard-Slab-Logo-Horizontal-470-110px.png.webp"
               logoInverted="https://uploads.divjoy.com/logo-white.svg"
               sticky={true}
             />
