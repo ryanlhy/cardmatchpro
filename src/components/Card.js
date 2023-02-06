@@ -19,8 +19,8 @@ export default function ActionAreaCard(props) {
       console.log("did not call api from search");
     } else {
       // reset at every search query
-      // const urlSrc = `https://ryanlhy.pythonanywhere.com/ebay/${selectedInput}`;
-      const urlSrc = `http://localhost:8000/ebay/${selectedInput}`;
+      const urlSrc = `https://ryanlhy.pythonanywhere.com/ebay/${selectedInput}`;
+      // const urlSrc = `http://localhost:8000/ebay/${selectedInput}`;
       apiFunc(urlSrc);
       console.log(urlSrc)
     }
