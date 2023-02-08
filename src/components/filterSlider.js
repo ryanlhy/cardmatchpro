@@ -4,7 +4,6 @@ import Slider from '@mui/material/Slider';
 import { Container }  from '@material-ui/core';
 import { useDispatch } from 'react-redux';
 import { matchFilterStrict } from '../store/searchSlice';  
-import { useEffect } from 'react';
 
 export default function DiscreteSlider() {
   const dispatch = useDispatch();
@@ -19,7 +18,7 @@ export default function DiscreteSlider() {
 
   return (
     <Container maxWidth="md">
-        <Box sx={{ width: 300 , justifyContent: 'center'}}>
+        <Box sx={{ width: 300 , mx:'auto', paddingTop:5}}>
             <Slider
                 aria-label="Restricted values"
                 defaultValue={0}
