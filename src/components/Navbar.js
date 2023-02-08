@@ -22,6 +22,7 @@ import { Link } from "./../util/router";
 import { useAuth } from "./../util/auth";
 import { useDarkMode } from "./../util/theme";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { Badge } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   logo: {
@@ -142,7 +143,9 @@ function Navbar(props) {
               color="inherit"
               style={{ opacity: 0.6 }}
               component={Link} to="/dashboard">
-                <ShoppingCartIcon />
+                <Badge badgeContent={21} color="primary">
+                  <ShoppingCartIcon />
+                </Badge>
               </IconButton>
     
             
