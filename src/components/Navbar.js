@@ -21,6 +21,7 @@ import Section from "./Section";
 import { Link } from "./../util/router";
 import { useAuth } from "./../util/auth";
 import { useDarkMode } from "./../util/theme";
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 const useStyles = makeStyles((theme) => ({
   logo: {
@@ -137,6 +138,14 @@ function Navbar(props) {
                 </>
               )}
 
+              <IconButton
+              color="inherit"
+              style={{ opacity: 0.6 }}
+              sx={{}}>
+                <ShoppingCartIcon />
+              </IconButton>
+    
+            
               <IconButton
                 color="inherit"
                 onClick={darkMode.toggle}
