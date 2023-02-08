@@ -4,11 +4,15 @@ export const searchSlice = createSlice({
   name: 'SEARCH_INPUT',
   initialState: {
     value: 0,
-    searchSelectedObj: "",
+    searchSelectedValue: "",
+    searchSelectedObj: {},
     inputObject: {},
     matchFilterStrict: null,
   },
   reducers: {
+    searchSelectedValue: (state, action) => {
+      state.searchSelectedValue = action.payload
+    },
     searchSelectedObj: (state, action) => {
       state.searchSelectedObj = action.payload
     },
@@ -22,6 +26,6 @@ export const searchSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { searchSelectedObj, matchFilterStrict } = searchSlice.actions
+export const { searchSelectedValue, searchSelectedObj,searchInputObject, matchFilterStrict, } = searchSlice.actions
 
 export default searchSlice.reducer

@@ -5,12 +5,14 @@ import Stack from '@mui/material/Stack';
 import Autocomplete from '@mui/material/Autocomplete';
 import { Container } from '@material-ui/core';
 import { useSelector, useDispatch } from 'react-redux';
-import { searchSelectedObj } from '../store/searchSlice';
+import { searchSelectedValue, searchSelectedObj } from '../store/searchSlice';
 import { createImmutableStateInvariantMiddleware } from '@reduxjs/toolkit';
 // require('dotenv').config()
 
 export default function FreeSolo() {
-    const selectedInput = useSelector((state) => state.search.searchSelectedObj);
+    const selectedValue = useSelector((state) => state.search.searchSelectedValue);
+    const selectedObj = useSelector((state) => state.search.searchSelectedObj);
+
     const dispatch = useDispatch();
     const [pokemonArray, setPokemonArray] = useState([]);
     const [input, setInput] = useState("");
@@ -63,7 +65,10 @@ export default function FreeSolo() {
         const {label, id} = value;
         const selectedArrElement = pokemonArray.filter((p) => p.id === id)[0];
         console.log('selectedArrElement: ', selectedArrElement);
-        dispatch(searchSelectedObj(label));
+        console.log('label: ', label)
+        dispatch(searchSelectedValue(label));
+        dispatch(searchSelectedObj(selectedArrElement));
+
         console.log('value: ', value);
         if (reason === 'selectOption') { // detect if an option is selected
           console.log('selected option');
@@ -82,7 +87,7 @@ export default function FreeSolo() {
     return (
       <Container maxWidth="md">
           <Stack spacing={2} mx='auto' sx={{ width: "70%", paddingTop: 5}} >
-          <div>dispatch: {selectedInput}</div>
+          <div>dispatch: {selectedValue}</div>
           <Autocomplete
               freeSolo
               id="free-solo-2-demo"

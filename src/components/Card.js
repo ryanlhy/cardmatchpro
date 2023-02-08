@@ -9,11 +9,11 @@ import { useSelector, useDispatch } from 'react-redux';
 
 export default function ActionAreaCard(props) {
   const [pokemonArray, setPokemonArray] = useState([]);
-  const selectedInput = useSelector((state) => state.search.searchSelectedObj);
+  const selectedInput = useSelector((state) => state.search.searchSelectedValue);
   const matchFilterStrict = useSelector((state) => state.search.matchFilterStrict);
   const [indexFilter, setIndexFilter] = useState([]);
   const dispatch = useDispatch();
-
+  console.log("selected input" + selectedInput)
   const input = "charizard 11/108 holo psa 9"
   const callApiSearch = async () => {
     if (selectedInput === "") {
