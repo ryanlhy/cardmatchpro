@@ -141,7 +141,7 @@ function Navbar(props) {
               <IconButton
               color="inherit"
               style={{ opacity: 0.6 }}
-              sx={{}}>
+              component={Link} to="/dashboard">
                 <ShoppingCartIcon />
               </IconButton>
     
