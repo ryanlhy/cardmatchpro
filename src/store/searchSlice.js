@@ -9,15 +9,6 @@ export const searchSlice = createSlice({
     matchFilterStrict: null,
   },
   reducers: {
-    increment: state => {
-      state.value += 1
-    },
-    decrement: state => {
-      state.value -= 1
-    },
-    incrementByAmount: (state, action) => {
-      state.value += action.payload
-    },
     searchSelectedObj: (state, action) => {
       state.searchSelectedObj = action.payload
     },
@@ -31,6 +22,6 @@ export const searchSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { increment, decrement, incrementByAmount, searchSelectedObj, matchFilterStrict } = searchSlice.actions
+export const { searchSelectedObj, matchFilterStrict } = searchSlice.actions
 
 export default searchSlice.reducer
