@@ -64,14 +64,13 @@ export default function FreeSolo() {
       const handleSelectedQuery = (e, value, reason) => {
         const {label, id} = value;
         const selectedArrElement = pokemonArray.filter((p) => p.id === id)[0];
-        console.log('selectedArrElement: ', selectedArrElement);
-        console.log('label: ', label)
-        dispatch(searchSelectedValue(label));
-        dispatch(searchSelectedObj(selectedArrElement));
+        // dispatch(searchSelectedValue(label));
+        // dispatch(searchSelectedObj(selectedArrElement));
 
-        console.log('value: ', value);
         if (reason === 'selectOption') { // detect if an option is selected
           console.log('selected option');
+          dispatch(searchSelectedValue(label));
+          dispatch(searchSelectedObj(selectedArrElement));
           // run code 
         }
       }
@@ -107,7 +106,6 @@ export default function FreeSolo() {
                   )}
                   />
           </Stack>
-          {/* <ActionAreaCard pokemonArray={pokemonArray} /> */}
       </Container>
     );
   }
