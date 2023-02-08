@@ -3,18 +3,18 @@ import { useEffect, useState } from 'react';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import Autocomplete from '@mui/material/Autocomplete';
-import { Card, Container } from '@material-ui/core';
+import { Container } from '@material-ui/core';
 import { useSelector, useDispatch } from 'react-redux';
-import { searchInputValue } from '../store/searchSlice';
+import { searchSelectedObj } from '../store/searchSlice';
 import { createImmutableStateInvariantMiddleware } from '@reduxjs/toolkit';
 // require('dotenv').config()
 
 export default function FreeSolo() {
-    const selectedInput = useSelector((state) => state.searchInput.inputValue);
+    const selectedInput = useSelector((state) => state.search.searchSelectedObj);
     const dispatch = useDispatch();
     const [pokemonArray, setPokemonArray] = useState([]);
     const [input, setInput] = useState("");
-
+    console.log(pokemonArray)
     const pokeApiKey = process.env.pokeApiKey;
     
     const callTenCharizard = async () => {
@@ -60,7 +60,11 @@ export default function FreeSolo() {
       }, [input]);
 
       const handleSelectedQuery = (e, value, reason) => {
-        dispatch(searchInputValue(value));
+        const {label, id} = value;
+        const selectedArrElement = pokemonArray.filter((p) => p.id === id)[0];
+        console.log('selectedArrElement: ', selectedArrElement);
+        dispatch(searchSelectedObj(label));
+        console.log('value: ', value);
         if (reason === 'selectOption') { // detect if an option is selected
           console.log('selected option');
           // run code 
@@ -68,8 +72,11 @@ export default function FreeSolo() {
       }
 
       const handleAccessProps = (arr, index) => {
-        const query = `${arr.name} ${arr.number}/${arr.set.printedTotal} ${arr.set.series} ${arr.set.name}`
-        return query
+        const valueObj = {
+          label:`${arr.name} ${arr.number}/${arr.set.printedTotal} ${arr.set.series} ${arr.set.name}`,
+          id:arr.id
+        }
+        return valueObj;
       }
     // searchbar -> card.call api -> card .. map
     return (
@@ -80,7 +87,6 @@ export default function FreeSolo() {
               freeSolo
               id="free-solo-2-demo"
               disableClearable
-              // options={pokemonArray.map((arr, index) => `${arr.name} ${arr.number}/${arr.set.printedTotal} ${arr.set.series} ${arr.set.name} ${index}`)}
               options={pokemonArray.map((arr, index) => handleAccessProps(arr, index))}
               onChange={handleSelectedQuery}
               renderInput={(params) => (

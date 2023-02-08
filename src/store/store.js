@@ -3,6 +3,6 @@ import appReducer from './searchSlice'
 
 export default configureStore({
   reducer: {
-    searchInput: appReducer
+    search: appReducer
   }
 })

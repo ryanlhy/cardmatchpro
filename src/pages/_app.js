@@ -25,8 +25,8 @@ function App(props) {
           <>
             <Navbar
               color="default"
-              logo="https://uploads.divjoy.com/logo.svg"
-              logoInverted="https://uploads.divjoy.com/logo-white.svg"
+              logo="https://zardslabs.com/wp-content/uploads/2022/03/Zard-Slab-Logo-Horizontal-470-110px.png.webp"
+              logoInverted="https://zardslabs.com/wp-content/uploads/2022/03/Zard-Slab-Logo-Horizontal-470-110px.png.webp"
             />
 
             <Switch>
@@ -67,7 +67,7 @@ function App(props) {
               description="The Competitive Edge for Pokemon Card Ecommerce"
               copyright={`© ${new Date().getFullYear()} Company`}
               logo="https://zardslabs.com/wp-content/uploads/2022/03/Zard-Slab-Logo-Horizontal-470-110px.png.webp"
-              logoInverted="https://uploads.divjoy.com/logo-white.svg"
+              logoInverted="https://zardslabs.com/wp-content/uploads/2022/03/Zard-Slab-Logo-Horizontal-470-110px.png.webp"
               sticky={true}
             />
           </>

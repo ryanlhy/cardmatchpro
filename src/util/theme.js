@@ -20,8 +20,8 @@ const themeConfig = {
         // Uncomment to specify light/dark
         // shades instead of automatically
         // calculating from above value.
-        //light: "#4791db",
-        //dark: "#115293",
+        // light: "#4791db",
+        // dark: "#115293",
       },
       secondary: {
         main: colors.pink["500"],
