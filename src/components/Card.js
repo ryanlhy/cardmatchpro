@@ -9,7 +9,8 @@ import { useSelector, useDispatch } from 'react-redux';
 
 export default function ActionAreaCard(props) {
   const [pokemonArray, setPokemonArray] = useState([]);
-  const selectedInput = useSelector((state) => state.searchInput.inputValue);
+  const selectedInput = useSelector((state) => state.search.searchSelectedObj);
+  const matchFilterStrict = useSelector((state) => state.search.matchFilterStrict);
   const [indexFilter, setIndexFilter] = useState([]);
   const dispatch = useDispatch();
 
@@ -25,7 +26,7 @@ export default function ActionAreaCard(props) {
       console.log(urlSrc)
     }
   };
-  console.log(pokemonArray)
+  // console.log(pokemonArray)
 
   const apiFunc = async (urlSrc) => {
     const tempArray = pokemonArray; // temp array to reset if error
@@ -52,6 +53,11 @@ export default function ActionAreaCard(props) {
 
   const ebayCards = pokemonArray.map((card, index) => {
     // remove all cards with index in indexFilter, try to make it a filter
+    if (matchFilterStrict === "Exact") {
+      if (indexFilter.includes(index)) {
+        return null;
+      }
+    }
     // if (indexFilter.includes(index)) {
     //   return null;
     // }
@@ -85,7 +91,7 @@ export default function ActionAreaCard(props) {
 
   return (
     <Container>
-      <Box sx={{display:'flex',flexWrap: 'wrap', paddingX:1, paddingY:5}}>
+      <Box sx={{display:'flex',flexWrap: 'wrap', paddingX:1, paddingY:5, justifyContent: 'center'}}>
         {ebayCards}
 
       </Box>

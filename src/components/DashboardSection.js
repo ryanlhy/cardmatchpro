@@ -91,7 +91,7 @@ function DashboardSection(props) {
                     </Typography>
                     <Typography component="div">
                       <div>
-                        You are signed in as <strong>{auth.user.email}</strong>.
+                        You are signed in as <strong>{auth.user.email} and uid is {auth.user.uid}</strong>.
                       </div>
 
                       {auth.user.stripeSubscriptionId && (
