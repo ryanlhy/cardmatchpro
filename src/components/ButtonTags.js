@@ -8,7 +8,7 @@ import CancelIcon from '@mui/icons-material/Cancel';
 import Grow from '@mui/material/Grow';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { displayFilteredCards, isButtonFilterOn} from '../store/searchSlice';
+import { displayFilteredCards, isButtonFilterOn, removeFilteredCards} from '../store/searchSlice';
 
 export default function ButtonTags(props) {
     const dispatch = useDispatch();
@@ -16,17 +16,19 @@ export default function ButtonTags(props) {
 
     const [clicked, setClicked] = useState(false);
     const handleClick = () => {
+      const accessFilterKeyValues = pokemonArray.filterCalls.keywordsListResponse
+
         if (!clicked) {
             console.info(`you clicked at ${clicked}}`);
             console.log(props.tag)
             console.log(pokemonArray)
-            const accessFilterKeyValues = pokemonArray.filterCalls.keywordsListResponse
-            console.log(accessFilterKeyValues)
+            console.log(accessFilterKeyValues[props.tag])
             dispatch(isButtonFilterOn(true));
             dispatch(displayFilteredCards(accessFilterKeyValues[props.tag]));
 
         } else {
-          dispatch(isButtonFilterOn(false));
+          // dispatch(isButtonFilterOn(false));
+          dispatch(removeFilteredCards(accessFilterKeyValues[props.tag]));
           console.info(`you clicked at ${clicked}`);
         }
     }
