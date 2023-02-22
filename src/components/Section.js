@@ -82,7 +82,7 @@ function Section(props) {
       }
       {...otherProps}
     >
-      {bgImage && <BackgroundImage image={bgImage} opacity={bgImageOpacity} />}
+      {true && <BackgroundImage image={bgImage} opacity={bgImageOpacity} />}
 
       {props.children}
     </Box>

@@ -7,7 +7,12 @@ export const searchSlice = createSlice({
     searchSelectedValue: "",
     searchSelectedObj: {},
     inputObject: {},
-    matchFilterStrict: null,
+    matchFilterStrict: "All",
+    buttonGradeTags: [],
+    displayFilteredCards: [],
+    allCards: [],
+    apiResponseData: {},
+    isButtonFilterOn: false,
   },
   reducers: {
     searchSelectedValue: (state, action) => {
@@ -21,11 +26,41 @@ export const searchSlice = createSlice({
     },
     matchFilterStrict: (state, action) => {
       state.matchFilterStrict = action.payload
+    },
+    buttonGradeTags: (state, action) => {
+      state.buttonGradeTags = action.payload
+    },
+    displayFilteredCards: (state, action) => {
+      // access the value of the given key in the api response data
+      state.displayFilteredCards = action.payload
+      // state.displayFilteredCards = action.payload
+    },
+    allCards: (state, action) => {
+      state.allCards = action.payload
+    },
+    apiResponseData: (state, action) => {
+      state.apiResponseData = action.payload
+    },
+    isButtonFilterOn: (state, action) => {
+      state.isButtonFilterOn = action.payload
     }
+
+
+
   }
 })
 
 // Action creators are generated for each case reducer function
-export const { searchSelectedValue, searchSelectedObj,searchInputObject, matchFilterStrict, } = searchSlice.actions
+export const { 
+    searchSelectedValue, 
+    searchSelectedObj,
+    searchInputObject, 
+    matchFilterStrict, 
+    buttonGradeTags, 
+    displayFilteredCards, 
+    allCards,
+    apiResponseData,
+    isButtonFilterOn
+} = searchSlice.actions
 
 export default searchSlice.reducer
