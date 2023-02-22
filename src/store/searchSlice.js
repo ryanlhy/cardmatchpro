@@ -32,8 +32,11 @@ export const searchSlice = createSlice({
     },
     displayFilteredCards: (state, action) => {
       // access the value of the given key in the api response data
-      state.displayFilteredCards = action.payload
+      state.displayFilteredCards = [...state.displayFilteredCards, ...action.payload]
       // state.displayFilteredCards = action.payload
+    },
+    removeFilteredCards: (state, action) => {
+      state.displayFilteredCards = state.displayFilteredCards.filter((card) => !action.payload.includes(card))
     },
     allCards: (state, action) => {
       state.allCards = action.payload
@@ -57,7 +60,8 @@ export const {
     searchInputObject, 
     matchFilterStrict, 
     buttonGradeTags, 
-    displayFilteredCards, 
+    displayFilteredCards,
+    removeFilteredCards, 
     allCards,
     apiResponseData,
     isButtonFilterOn
