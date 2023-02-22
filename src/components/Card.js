@@ -12,6 +12,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import Grow from '@mui/material/Grow';
 import { Diversity1Sharp } from '@mui/icons-material';
 import BackgroundOverlay from './BackgroundOverlay';
+import { buttonGradeTags, displayFilteredCards, apiResponseData, isButtonFilterOn } from '../store/searchSlice';
 
 
 export default function ActionAreaCard(props) {
@@ -19,6 +20,8 @@ export default function ActionAreaCard(props) {
   const selectedInput = useSelector((state) => state.search.searchSelectedValue);
   const matchFilterStrict = useSelector((state) => state.search.matchFilterStrict);
   const selectedObj = useSelector((state) => state.search.searchSelectedObj);
+  const displayFilteredCard = useSelector((state) => state.search.displayFilteredCards);
+  const isFilterOn = useSelector((state) => state.search.isButtonFilterOn);
   const [indexFilter, setIndexFilter] = useState([]);
   const [loading, setLoading ] = useState(false);
   const [growCards, setGrowCards] = useState(false);
@@ -55,7 +58,10 @@ export default function ActionAreaCard(props) {
       if (data.length !== 0 || data.data !== null) {
         console.log("data: ", data);
         setPokemonArray(data.data);
-        setIndexFilter(data.negative_keywords_index);
+        // setIndexFilter(data.filterCalls.exactMatch);
+        dispatch(apiResponseData(data))
+        // dispatch(displayFilteredCards(data.data.map((arr) => arr.itemId[0]))); // display all cards
+        dispatch(buttonGradeTags(data.filterCalls.keywordsListResponse));
       }
     } catch (err) {
       console.log("Error: ", err);
@@ -71,22 +77,20 @@ export default function ActionAreaCard(props) {
     const newImage = image.replace("s-l140", "s-l250");
     return newImage;
   };
-
+  console.log(displayFilteredCard)
+  console.log(pokemonArray);
   const ebayCards = pokemonArray === null? <Stack>No results</Stack> : 
   pokemonArray.map((card, index) => {
-    // remove all cards with index in indexFilter, try to make it a filter
-    if (matchFilterStrict === "Exact") {
-      if (indexFilter.includes(index)) {
+    // remove cards that do not match strict filter, and display only cards that match exact filter
+    if (isFilterOn === true) {
+      if (!displayFilteredCard.includes(card.itemId[0])) {
         return null;
       }
     }
-    // if (indexFilter.includes(index)) {
-    //   return null;
-    // }
     return (
-      <Card sx={{ maxWidth: 200, px:1, borderRadius:1}} key={index}>
-        <Grow in={growCards} style={{ transformOrigin: '50% 100%'}} 
+        <Grow in={growCards} style={{ transformOrigin: '50% 100%'} } key={index}
         {...(growCards ? {timeout:2000} : {})}>
+      <Card sx={{ maxWidth: 200, px:0, borderRadius:1, margin:1}} key={index}>
 
         <CardActionArea sx={{}}>
         
@@ -117,15 +121,19 @@ export default function ActionAreaCard(props) {
           </CardContent>
           {/* <AddShoppingCartIcon sx={{position:'absolute', bottom:0, right:0, color:'black'}}/> */}
         </CardActionArea>
-          </Grow>
       </Card>
+          </Grow>
     );
+
   });
 
   return (
-    <Container>
-      <Grid container spacing={5} sx={{mx:'auto'}} >
-      {/* <BackgroundOverlay/> */}
+    <Container sx={{}}>
+      {/* <Box sx={{justifyContent: 'center', display:'flex', zIndex: -1}}>
+          <BackgroundOverlay/>
+      </Box> */}
+      <Grid container spacing={5} sx={{mx:'auto', opacity:0.5}} >
+        
       {/* skeleton loading animation */}
       {loading ? 
         <Box sx={{  justifyContent: 'center', width: '100%', display:'flex',flexWrap: 'wrap'}}>
@@ -141,6 +149,7 @@ export default function ActionAreaCard(props) {
           {ebayCards}
       </Box> */}
       </Grid>
+      
     </Container>
   );
 }

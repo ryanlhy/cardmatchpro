@@ -18,7 +18,7 @@ export default function DiscreteSlider() {
 
   return (
     <Container maxWidth="md">
-        <Box sx={{ width: 300 , mx:'auto', paddingTop:5}}>
+        <Box sx={{ width: 300 , mx:'auto', paddingTop:5, paddingBottom:5}}>
             <Slider
                 aria-label="Restricted values"
                 defaultValue={0}

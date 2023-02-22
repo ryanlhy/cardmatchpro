@@ -12,6 +12,7 @@ const useStyles = makeStyles((theme) => ({
     right: 0,
     position: "absolute",
     zIndex: 0,
+    // margin: "auto",
   },
 }));
 
@@ -25,7 +26,11 @@ function BackgroundImage(props) {
       className={classes.root}
       style={{
         backgroundImage: `url(${image})`,
-        opacity: opacity,
+        // backgroundImage: `url(https://images.pokemontcg.io/base1/4_hires.png)`,
+
+        // opacity: opacity,
+        opacity: 0.2,
+
       }}
       {...otherProps}
     />

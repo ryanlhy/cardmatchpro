@@ -39,12 +39,10 @@ const useStyles = makeStyles((theme) => ({
 
 function Navbar(props) {
   const classes = useStyles();
-
   const auth = useAuth();
   const darkMode = useDarkMode();
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [menuState, setMenuState] = useState(null);
-
   // Use inverted logo if specified
   // and we are in dark mode
   const logo =
@@ -147,7 +145,6 @@ function Navbar(props) {
                   <ShoppingCartIcon />
                 </Badge>
               </IconButton>
-    
             
               <IconButton
                 color="inherit"
