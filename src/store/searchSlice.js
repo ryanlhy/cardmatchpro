@@ -13,6 +13,12 @@ export const searchSlice = createSlice({
     allCards: [],
     apiResponseData: {},
     isButtonFilterOn: false,
+    animationHandler: {
+      searchBar: false,
+      buttonTags: false,
+      filterSlider: false,
+      card: false,
+    }
   },
   reducers: {
     searchSelectedValue: (state, action) => {
@@ -46,6 +52,9 @@ export const searchSlice = createSlice({
     },
     isButtonFilterOn: (state, action) => {
       state.isButtonFilterOn = action.payload
+    },
+    animationHandler: (state, action) => {
+      state.animationHandler = action.payload
     }
 
 
@@ -64,7 +73,8 @@ export const {
     removeFilteredCards, 
     allCards,
     apiResponseData,
-    isButtonFilterOn
+    isButtonFilterOn,
+    animationHandler,
 } = searchSlice.actions
 
 export default searchSlice.reducer
