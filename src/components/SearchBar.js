@@ -10,8 +10,9 @@ import Grow from '@mui/material/Grow';
 import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
 import { Paper } from '@mui/material';
+import { PropaneSharp } from '@mui/icons-material';
 
-export default function FreeSolo() {
+export default function FreeSolo(props) {
     const selectedValue = useSelector((state) => state.search.searchSelectedValue);
     const selectedObj = useSelector((state) => state.search.searchSelectedObj);
     // const autoCompleteGrade = useSelector((state) => state.search.autoCompleteGrade);
@@ -23,6 +24,7 @@ export default function FreeSolo() {
     const [displayAdditionalOptions, setDisplayAdditionalOptions] = useState(false);
     const [callNewApi, setCallNewApi] = useState(true);
     const [saveSearchObj, setSaveSearchObj] = useState([]);
+    const [show, setShow] = useState(true);
     const pokeApiKey = process.env.pokeApiKey;
     
     const gradingCompanies = ["PSA", "CGC", "BGS", "SGC", "GAI", "Beckett"]
@@ -41,7 +43,9 @@ export default function FreeSolo() {
             let pageSize = 10;
             // const urlSrc = `https://api.pokemontcg.io/v2/cards?q=name:"*${input}*"&pageSize=${pageSize}&api_key=${pokeApiKey}`;
             // const urlSrc = `https://api.pokemontcg.io/v2/cards?q=name:"*${input}*"&pageSize=${pageSize}&api_key=${pokeApiKey}`;
-            const urlSrc = `http://localhost:8000/pokemon/${input}`;
+            // const urlSrc = `http://localhost:8000/pokemon/${input}`;
+            const urlSrc = `https://ryanlhy.pythonanywhere.com/pokemon/${input}`;
+
             apiFunc(urlSrc);
             console.log(urlSrc)
         }
@@ -98,6 +102,7 @@ export default function FreeSolo() {
               setInputIsSelected(true);
               console.log(selectedValue)
               setSearchOptions((searchOptions) => [ ...concatSearchOptions(label, id, gradingCompanies), ...searchOptions]);
+              handleFadeOut();
           }
       }
 
@@ -137,12 +142,22 @@ export default function FreeSolo() {
         setSaveSearchObj(selectedObjId);
     }
 
+    // handle fade in an fade out
+    const handleFadeOut = () => {
+      setShow(false);
+      setTimeout(() => {
+        setShow(true);
+      }, 2000);
+    };
+
     // searchbar -> card.call api -> card .. map
     return (
-      <Container maxWidth="md">
-          <Stack spacing={2} mx='auto' sx={{ width: "70%", paddingTop: 5}} >
-          <div>selectedValue: {selectedValue}</div>
-          <div>input: {input}</div>
+      <Container maxWidth={props.maxWidth}>
+        <Grow in={show} style={{ transformOrigin: '50% 100% 0'}} 
+        {...( {timeout:2000} )}>
+          <Stack spacing={2} mx='auto' sx={{ width: "70%", paddingTop: 0}} >
+          {/* <div>selectedValue: {selectedValue}</div>
+          <div>input: {input}</div> */}
           <Paper
             // component="form"
             sx={{ alignItems: 'center'}}
@@ -186,11 +201,12 @@ export default function FreeSolo() {
                   )}
                   />
                   </Paper>
-                  <IconButton type="button" sx={{ p: '10px' }} aria-label="search">
+                  {/* <IconButton type="button" sx={{ p: '10px' }} aria-label="search">
                     <SearchIcon />
-                  </IconButton>
+                  </IconButton> */}
                   
           </Stack>
+          </Grow>
       </Container>
     );
   }
