@@ -54,6 +54,7 @@ export const searchSlice = createSlice({
       state.isButtonFilterOn = action.payload
     },
     animationHandler: (state, action) => {
+      // if previous state is true, then set to false
       state.animationHandler = action.payload
     }
   }
