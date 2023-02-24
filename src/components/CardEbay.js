@@ -6,15 +6,7 @@ import Typography from '@mui/material/Typography';
 import { Box, CardActionArea, Container, containerClasses, Skeleton, Stack, Modal } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Avatar, Grid } from '@material-ui/core';
-import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import Grow from '@mui/material/Grow';
-import { Diversity1Sharp } from '@mui/icons-material';
-import BackgroundOverlay from './BackgroundOverlay';
-import { buttonGradeTags, displayFilteredCards, apiResponseData, isButtonFilterOn } from '../store/searchSlice';
-import { Link } from 'react-router-dom';
-
 
 export default function CardEbay(props) {
     const [growCards, setGrowCards] = useState(true);
