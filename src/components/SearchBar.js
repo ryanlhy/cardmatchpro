@@ -165,8 +165,8 @@ export default function FreeSolo(props) {
         <Grow in={show} style={{ transformOrigin: '50% 100% 0'}} 
         {...( {timeout:2000} )}>
           <Stack spacing={2} mx='auto' sx={{ width: "70%", paddingTop: 0, marginTop: displayTop? 0 : 40}} >
-          <div>selectedValue: {selectedValue}</div>
-          <div>input: {input}</div>
+          {/* <div>selectedValue: {selectedValue}</div>
+          <div>input: {input}</div> */}
           <Paper
             // component="form"
             sx={{ alignItems: 'center'}}
