@@ -28,7 +28,9 @@ export default function FreeSolo(props) {
     const [displayTop, setDisplayTop] = useState(false);
     const pokeApiKey = process.env.pokeApiKey;
     
-    const gradingCompanies = ["PSA", "CGC", "BGS", "SGC", "GAI", "Beckett"]
+    // const gradingCompanies = ["PSA", "CGC", "BGS", "SGC", "GAI", "Beckett"]
+    const gradingCompanies = []
+
     console.log(pokemonArray)
     console.log(saveSearchObj)
     const callTenCharizard = async () => {
@@ -63,8 +65,8 @@ export default function FreeSolo(props) {
                   setPokemonArray(data.data);
                   setSearchOptions(prevSearchOptions =>
                     [...prevSearchOptions, ...data.data.map((arr, index) => handleAccessProps(arr, index))]
-                      .filter((option, index, options) => options.findIndex(o => o.id === option.id) === index)
-                  ); // filter to remove duplicate options
+                      .filter((option, index, options) => options.findIndex(o => o.id === option.id) === index).slice(0, 100)
+                  ); // filter to remove duplicate options, extract first 100 with slice
                   
                 }
           } catch (err) {
@@ -85,7 +87,7 @@ export default function FreeSolo(props) {
               else console.log("callNewApi: " + callNewApi)
           }
         
-      }, [input, inputIsSelected]);
+      }, [input, ]);
 
       // const handleSetSearchOptions = (label, id, gradingCompanies) =>{
       //     setSearchOptions((searchOptions) => [ ...concatSearchOptions(label, id, gradingCompanies), ...searchOptions]);
@@ -93,9 +95,11 @@ export default function FreeSolo(props) {
       // }
 
       const handleSelectedQuery = (e, value, reason) => {
-          const {label, id} = value;
+          // const {label, id} = value;
+          const label = value.label || value
+          const id = value.id
           const selectedArrElement = pokemonArray.filter((p) => p.id === id || p.id === saveSearchObj.id)[0];
-          dispatch(searchSelectedValue(label || value));
+          dispatch(searchSelectedValue(label));
           dispatch(searchSelectedObj(selectedArrElement));
           handleFadeOut();
 
@@ -103,6 +107,8 @@ export default function FreeSolo(props) {
           if (reason === 'selectOption') { // detect if an option is selected
               console.log('selected option');
               setInputIsSelected(true);
+              dispatch(searchSelectedValue(label));
+
               setSearchOptions((searchOptions) => [ ...concatSearchOptions(label, id, gradingCompanies), ...searchOptions]);
           }
       }
@@ -159,8 +165,8 @@ export default function FreeSolo(props) {
         <Grow in={show} style={{ transformOrigin: '50% 100% 0'}} 
         {...( {timeout:2000} )}>
           <Stack spacing={2} mx='auto' sx={{ width: "70%", paddingTop: 0, marginTop: displayTop? 0 : 40}} >
-          {/* <div>selectedValue: {selectedValue}</div>
-          <div>input: {input}</div> */}
+          <div>selectedValue: {selectedValue}</div>
+          <div>input: {input}</div>
           <Paper
             // component="form"
             sx={{ alignItems: 'center'}}
@@ -196,7 +202,7 @@ export default function FreeSolo(props) {
                     native: true,
                   }}
                   // helperText="Please enter a pokemon name"
-                  onChange={(e) => handleSetInput(e)}
+                  onChange={handleSetInput}
                   // variant="standard"
                   >
                     </TextField>
