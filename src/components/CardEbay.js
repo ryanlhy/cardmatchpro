@@ -34,6 +34,31 @@ export default function CardEbay(props) {
         const newImage = image.replace("s-l140", `s-l${size}`);
         return newImage;
       };
+
+      // translate the ebay code date format
+      function formatDuration(timeCode) {
+        console.log(timeCode[0])
+        const regex = /P(\d+D)?(T(\d+H)?(\d+M)?(\d+S)?)?/; // regex to match the time code
+        const matches = timeCode[0].match(regex); // match the time code with the regex
+      
+        let days = 0,
+            hours = 0,
+            minutes = 0,
+            seconds = 0;
+      
+        // extract the values for days, hours, minutes, and seconds from the regex matches
+        if (matches[1]) { days = parseInt(matches[1].slice(0, -1)); }
+        if (matches[4]) { hours = parseInt(matches[4].slice(0, -1)); }
+        if (matches[5]) { minutes = parseInt(matches[5].slice(0, -1)); }
+        if (matches[6]) { seconds = parseInt(matches[6].slice(0, -1)); }
+      
+        // return the formatted duration string
+        return `${days}d${days !== 1 ? '' : ''}, 
+        ${hours}h${hours !== 1 ? '' : ''}, 
+        ${minutes}m${minutes !== 1 ? '' : ''}, 
+        ${seconds}s${seconds !== 1 ? '' : ''}`;
+      }
+            
     return (
         <Grow in={isShow} style={{ transformOrigin: '50% 100%'} } 
         {...(isShow ? {timeout:2000} : {})}
@@ -68,7 +93,7 @@ export default function CardEbay(props) {
                             </Typography>
                             
                             <Typography variant="body2" color="text.secondary">
-                            Time Left: {cardProps.sellingStatus[0].timeLeft}
+                            Time Left: {formatDuration(cardProps.sellingStatus[0].timeLeft)}
                             </Typography >
                             <Typography variant="body2" color="text.secondary" component="a" href={cardProps.viewItemURL[0]}>
                             See on ebay
