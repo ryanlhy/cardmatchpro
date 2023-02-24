@@ -33,7 +33,7 @@ export default function SearchTagSection () {
     }
   }, [selectedValue]);
 
-  console.log(selectedValue)
+  console.log(buttonGradeTags)
   return (
     <Container>
     <Box sx={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'row',     justifyContent: 'center', 

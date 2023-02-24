@@ -37,7 +37,6 @@ export default function CardEbay(props) {
 
       // translate the ebay code date format
       function formatDuration(timeCode) {
-        console.log(timeCode[0])
         const regex = /P(\d+D)?(T(\d+H)?(\d+M)?(\d+S)?)?/; // regex to match the time code
         const matches = timeCode[0].match(regex); // match the time code with the regex
       
