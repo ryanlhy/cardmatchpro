@@ -15,7 +15,7 @@ export default function CardEbay(props) {
     const [isShow, setIsShow] = useState(showProps);
 
     const displayFilteredCard = useSelector((state) => state.search.displayFilteredCards);
-    const indexProps = props.key
+    // const indexProps = props.key
     const cardProps = props.card
 
     const handleOpen = () => {
@@ -35,11 +35,11 @@ export default function CardEbay(props) {
         return newImage;
       };
     return (
-        <Grow in={isShow} style={{ transformOrigin: '50% 100%'} } key={indexProps}
+        <Grow in={isShow} style={{ transformOrigin: '50% 100%'} } 
         {...(isShow ? {timeout:2000} : {})}
         onExited={handleExited}
         >
-            <Card sx={{ maxWidth: 200, px:0, borderRadius:1, margin:1}} key={indexProps}>
+            <Card sx={{ maxWidth: 200, px:0, borderRadius:1, margin:1}}>
                 <CardActionArea sx={{}}>
         
         {/* position icon to top right and overlay image*/}
