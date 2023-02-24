@@ -17,19 +17,10 @@ export default function ButtonTags(props) {
     const [clicked, setClicked] = useState(false);
     const handleClick = () => {
       const accessFilterKeyValues = pokemonArray.filterCalls.keywordsListResponse
-
         if (!clicked) {
-            console.info(`you clicked at ${clicked}}`);
-            console.log(props.tag)
-            console.log(pokemonArray)
-            console.log(accessFilterKeyValues[props.tag])
-            dispatch(isButtonFilterOn(true));
             dispatch(displayFilteredCards(accessFilterKeyValues[props.tag]));
-
         } else {
-          // dispatch(isButtonFilterOn(false));
-          dispatch(removeFilteredCards(accessFilterKeyValues[props.tag]));
-          console.info(`you clicked at ${clicked}`);
+            dispatch(removeFilteredCards(accessFilterKeyValues[props.tag]));
         }
     }
 
