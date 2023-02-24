@@ -10,6 +10,7 @@ import BackgroundImage from "../components/BackgroundImage";
 import BackgroundOverlay from "../components/BackgroundOverlay";
 import ButtonTags from "../components/ButtonTags";
 import SearchTagSection from "../components/SearchTagSection";
+import Logo from "../components/Logo";
 
 
 
@@ -19,13 +20,13 @@ function IndexPage(props) {
     <>
       <Meta />
       <ThemeProvider>
-
-      <FreeSolo />
+      <BackgroundOverlay/>
+      <Logo/>
+      <FreeSolo maxWidth="md" />
       <SearchTagSection/>
       </ThemeProvider>
       <DescreteSlider/>
       {/* <DataGridDemo/> */}
-      <BackgroundOverlay/>
 
       <ActionAreaCard/>
       {/* <BackgroundImage/> */}

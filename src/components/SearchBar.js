@@ -25,6 +25,7 @@ export default function FreeSolo(props) {
     const [callNewApi, setCallNewApi] = useState(true);
     const [saveSearchObj, setSaveSearchObj] = useState([]);
     const [show, setShow] = useState(true);
+    const [displayTop, setDisplayTop] = useState(false);
     const pokeApiKey = process.env.pokeApiKey;
     
     const gradingCompanies = ["PSA", "CGC", "BGS", "SGC", "GAI", "Beckett"]
@@ -96,13 +97,13 @@ export default function FreeSolo(props) {
           const selectedArrElement = pokemonArray.filter((p) => p.id === id || p.id === saveSearchObj.id)[0];
           dispatch(searchSelectedValue(label || value));
           dispatch(searchSelectedObj(selectedArrElement));
+          handleFadeOut();
+
           setCallNewApi(false);
           if (reason === 'selectOption') { // detect if an option is selected
               console.log('selected option');
               setInputIsSelected(true);
-              console.log(selectedValue)
               setSearchOptions((searchOptions) => [ ...concatSearchOptions(label, id, gradingCompanies), ...searchOptions]);
-              handleFadeOut();
           }
       }
 
@@ -146,16 +147,18 @@ export default function FreeSolo(props) {
     const handleFadeOut = () => {
       setShow(false);
       setTimeout(() => {
+        setDisplayTop(true);
         setShow(true);
       }, 2000);
     };
+    console.log(selectedValue)
 
     // searchbar -> card.call api -> card .. map
     return (
-      <Container maxWidth={props.maxWidth}>
+      <Container maxWidth={props.maxWidth} sx={{}}>
         <Grow in={show} style={{ transformOrigin: '50% 100% 0'}} 
         {...( {timeout:2000} )}>
-          <Stack spacing={2} mx='auto' sx={{ width: "70%", paddingTop: 0}} >
+          <Stack spacing={2} mx='auto' sx={{ width: "70%", paddingTop: 0, marginTop: displayTop? 0 : 40}} >
           {/* <div>selectedValue: {selectedValue}</div>
           <div>input: {input}</div> */}
           <Paper
