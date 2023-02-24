@@ -104,14 +104,14 @@ function Footer(props) {
                   >
                     <ListItemText>Pricing</ListItemText>
                   </ListItem>
-                  <ListItem
+                  {/* <ListItem
                     component={Link}
                     to="/faq"
                     button={true}
                     className={classes.listItem}
                   >
                     <ListItemText>FAQ</ListItemText>
-                  </ListItem>
+                  </ListItem> */}
                 </List>
               </Grid>
               <Grid item={true} xs={12} md={4}>
@@ -124,14 +124,14 @@ function Footer(props) {
                       Company
                     </Typography>
                   </ListItem>
-                  <ListItem
+                  {/* <ListItem
                     component={Link}
                     to="/about"
                     button={true}
                     className={classes.listItem}
                   >
                     <ListItemText>About</ListItemText>
-                  </ListItem>
+                  </ListItem> */}
                   <ListItem
                     component={Link}
                     to="/contact"
@@ -140,7 +140,7 @@ function Footer(props) {
                   >
                     <ListItemText>Contact</ListItemText>
                   </ListItem>
-                  <ListItem
+                  {/* <ListItem
                     button={true}
                     component="a"
                     href="https://medium.com"
@@ -149,7 +149,7 @@ function Footer(props) {
                     className={classes.listItem}
                   >
                     <ListItemText>Blog</ListItemText>
-                  </ListItem>
+                  </ListItem> */}
                 </List>
               </Grid>
               <Grid item={true} xs={12} md={4}>
@@ -162,7 +162,7 @@ function Footer(props) {
                       Social
                     </Typography>
                   </ListItem>
-                  <ListItem
+                  {/* <ListItem
                     button={true}
                     component="a"
                     href="https://twitter.com/divjoy"
@@ -193,11 +193,11 @@ function Footer(props) {
                       />
                     </ListItemIcon>
                     <ListItemText>Facebook</ListItemText>
-                  </ListItem>
+                  </ListItem> */}
                   <ListItem
                     button={true}
                     component="a"
-                    href="https://instagram.com"
+                    href="https://www.instagram.com/charizardslabs/"
                     target="_blank"
                     rel="noreferrer"
                     className={classes.listItem}

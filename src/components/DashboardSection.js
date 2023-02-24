@@ -65,15 +65,15 @@ function DashboardSection(props) {
               <CardContent className={classes.cardContent}>
                 <Box>
                   <Typography variant="h6" paragraph={true}>
-                    <strong>What is this?</strong>
+                    <strong>THIS COMPONENT IS NOT READY</strong>
                   </Typography>
-                  <Typography paragraph={true}>
+                  {/* <Typography paragraph={true}>
                     The component on your left is an example UI that shows you
                     how to fetch, display, and update a list of items that
                     belong to the current authenticated user. Try it now by
                     adding a couple items.
-                  </Typography>
-                  <Typography paragraph={true}>
+                  </Typography> */}
+                  {/* <Typography paragraph={true}>
                     It also shows how you can limit features based on plan. If
                     you're subscribed to the "pro" or "business" plan then
                     you'll be able to use the star button to highlight items,
@@ -84,7 +84,7 @@ function DashboardSection(props) {
                     component to your needs. You may also find it easier to just
                     use this component as a reference as you build out your
                     custom UI.
-                  </Typography>
+                  </Typography> */}
                   <Box mt={3}>
                     <Typography variant="h6" paragraph={true}>
                       <strong>Extra debug info</strong>

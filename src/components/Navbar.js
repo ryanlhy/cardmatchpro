@@ -122,9 +122,9 @@ function Navbar(props) {
                       horizontal: "center",
                     }}
                   >
-                    <MenuItem component={Link} to="/dashboard">
+                    {/* <MenuItem component={Link} to="/dashboard">
                       Dashboard
-                    </MenuItem>
+                    </MenuItem> */}
                     <MenuItem component={Link} to="/settings/general">
                       Settings
                     </MenuItem>
