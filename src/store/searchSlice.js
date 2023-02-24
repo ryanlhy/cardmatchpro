@@ -56,9 +56,6 @@ export const searchSlice = createSlice({
     animationHandler: (state, action) => {
       state.animationHandler = action.payload
     }
-
-
-
   }
 })
 

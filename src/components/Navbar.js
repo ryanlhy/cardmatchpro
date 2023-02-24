@@ -23,6 +23,7 @@ import { useAuth } from "./../util/auth";
 import { useDarkMode } from "./../util/theme";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Badge } from "@material-ui/core";
+import FreeSolo from "./SearchBar";
 
 const useStyles = makeStyles((theme) => ({
   logo: {
@@ -77,6 +78,8 @@ function Navbar(props) {
                 <MenuIcon />
               </IconButton>
             </Hidden>
+            {/* <FreeSolo maxWidth=""/> */}
+
             <Hidden xsDown={true} implementation="css">
               {!auth.user && (
                 <Button component={Link} to="/auth/signin" color="inherit">
