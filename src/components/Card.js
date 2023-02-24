@@ -40,8 +40,8 @@ export default function ActionAreaCard(props) {
       }
       console.log(paramsObj)
       let param = JSON.stringify(paramsObj)
-      // const urlSrc = `https://ryanlhy.pythonanywhere.com/ebay/${selectedInput}`;
-      const urlSrc = `http://localhost:8000/ebay/${param}`;
+      const urlSrc = `https://ryanlhy.pythonanywhere.com/ebay/${param}`;
+      // const urlSrc = `http://localhost:8000/ebay/${param}`;
       // const urlSrc = `http://localhost:8000/testparam/${param}`;
 
       apiFunc(urlSrc);
@@ -51,13 +51,15 @@ export default function ActionAreaCard(props) {
 
   const apiFunc = async (urlSrc) => {
     const tempArray = pokemonArray; // temp array to reset if error
-    setGrowCards(true);
     try {
       const response = await fetch(urlSrc);
       const data = await response.json();
       if (data.length !== 0 || data.data !== null) {
         console.log("data: ", data);
-        setPokemonArray(data.data);
+        setTimeout(() => {
+          setPokemonArray(data.data);
+        }, 1000);
+
         // setIndexFilter(data.filterCalls.exactMatch);
         dispatch(apiResponseData(data))
         // dispatch(displayFilteredCards(data.data.map((arr) => arr.itemId[0]))); // display all cards
@@ -68,6 +70,8 @@ export default function ActionAreaCard(props) {
       setPokemonArray(tempArray);
     }
     setLoading(false);
+    setGrowCards(true);
+
   };
   useEffect(() => {
     callApiSearch();
@@ -82,7 +86,8 @@ export default function ActionAreaCard(props) {
   const ebayCards = pokemonArray === null? <Stack>No results</Stack> : 
   pokemonArray.map((card, index) => {
     // remove cards that do not match strict filter, and display only cards that match exact filter
-    if (isFilterOn === true) {
+    if (displayFilteredCard.length !== 0) {
+      console.log("displayFilteredCard: ", displayFilteredCard)
       if (!displayFilteredCard.includes(card.itemId[0])) {
         return null;
       }
