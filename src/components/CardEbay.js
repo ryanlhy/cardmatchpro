@@ -54,8 +54,7 @@ export default function CardEbay(props) {
         // return the formatted duration string
         return `${days}d${days !== 1 ? '' : ''}, 
         ${hours}h${hours !== 1 ? '' : ''}, 
-        ${minutes}m${minutes !== 1 ? '' : ''}, 
-        // ${seconds}s${seconds !== 1 ? '' : ''}`;
+        ${minutes}m${minutes !== 1 ? '' : ''}`;
       }
             
     return (
