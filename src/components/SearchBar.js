@@ -103,11 +103,7 @@ export default function FreeSolo(props) {
           if (reason === 'selectOption') { // detect if an option is selected
               console.log('selected option');
               setInputIsSelected(true);
-              setSearchOptions({
-                label: label,
-                id: id
-              });
-              // setSearchOptions((searchOptions) => [ ...concatSearchOptions(label, id, gradingCompanies), ...searchOptions]);
+              setSearchOptions((searchOptions) => [ ...concatSearchOptions(label, id, gradingCompanies), ...searchOptions]);
           }
       }
 
@@ -121,17 +117,17 @@ export default function FreeSolo(props) {
           return valueObj;
     }
 
-    // const concatSearchOptions = (label, id, conCatArr) => {
-    //       const newarr = conCatArr.map((e, index) => {
-    //           const valueObj = {
-    //             label: label.concat(` ${e}`),
-    //             id: id
-    //         }
-    //         return valueObj
-    //       })
-    //       // concat the search options with the grading companies
-    //       return newarr;
-    // }
+    const concatSearchOptions = (label, id, conCatArr) => {
+          const newarr = conCatArr.map((e, index) => {
+              const valueObj = {
+                label: label.concat(` ${e}`),
+                id: id
+            }
+            return valueObj
+          })
+          // concat the search options with the grading companies
+          return newarr;
+    }
 
     const handleSetInput = (e) => {
         setInput(e.target.value);
@@ -180,8 +176,7 @@ export default function FreeSolo(props) {
               // disabledItemsFocusable
               loading={true}
               // multiple={true}
-              // options={searchOptions.map((e) => e)}
-              options={searchOptions}
+              options={searchOptions.map((e) => e)}
               // options={searchOptions}
               // getOptionLabel={(option) => option.label}
               onChange={handleSelectedQuery}
@@ -218,4 +213,3 @@ export default function FreeSolo(props) {
       </Container>
     );
   }
-
