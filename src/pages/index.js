@@ -20,12 +20,12 @@ function IndexPage(props) {
     <>
       <Meta />
       <ThemeProvider>
-      <BackgroundOverlay/>
+      {/* <BackgroundOverlay/> */}
       <Logo/>
       <FreeSolo maxWidth="md" />
       <SearchTagSection/>
       </ThemeProvider>
-      <DescreteSlider/>
+      {/* <DescreteSlider/> */}
       {/* <DataGridDemo/> */}
 
       <ActionAreaCard/>
