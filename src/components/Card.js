@@ -94,12 +94,11 @@ export default function ActionAreaCard(props) {
     if (displayFilteredCard.length !== 0) {
       console.log("displayFilteredCard: ", displayFilteredCard)
       if (!displayFilteredCard.includes(card.itemId[0])) {
+        // return <CardEbay key={index} card={card} isShow={false}/>;
         return null;
       }
-    } else {
-      // return the ebay card
-    }
-    return <CardEbay key={index} card={card}/>
+    } 
+    return <CardEbay key={index} card={card} isShow={true}/>
 //     const handleOpen = () => {
 //       setOpen(true);
 //   };

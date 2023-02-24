@@ -9,24 +9,36 @@ import { useSelector, useDispatch } from 'react-redux';
 import Grow from '@mui/material/Grow';
 
 export default function CardEbay(props) {
-    const [growCards, setGrowCards] = useState(true);
+    const showProps = props.isShow
     const [open, setOpen] = useState(false);
+    const [show, setShow] = useState(true)
+    const [isShow, setIsShow] = useState(showProps);
+
     const displayFilteredCard = useSelector((state) => state.search.displayFilteredCards);
     const indexProps = props.key
     const cardProps = props.card
+
     const handleOpen = () => {
         setOpen(true);
         };
+
     const handleClose = () => {
       setOpen(false);
      };
+
+      const handleExited = () => {
+        setIsShow(false);
+      };
+
      const changeImageAttribute = (image, size) => {
         const newImage = image.replace("s-l140", `s-l${size}`);
         return newImage;
       };
     return (
-        <Grow in={growCards} style={{ transformOrigin: '50% 100%'} } key={indexProps}
-        {...(growCards ? {timeout:2000} : {})}>
+        <Grow in={isShow} style={{ transformOrigin: '50% 100%'} } key={indexProps}
+        {...(isShow ? {timeout:2000} : {})}
+        onExited={handleExited}
+        >
             <Card sx={{ maxWidth: 200, px:0, borderRadius:1, margin:1}} key={indexProps}>
                 <CardActionArea sx={{}}>
         
