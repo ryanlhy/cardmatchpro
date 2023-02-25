@@ -59,3 +59,8 @@ This project uses the following libraries and services:
 - Front End Hosting - AWS Amplify & Vercel
 - Back End Hosting - PythonAnywhere
 - Redux
+
+APIs
+- [Ebay API](https://developer.ebay.com/)
+- [Poke API](https://pokemontcg.io/)
+- [Zard Slabs API](https://zardslabs.com/)
