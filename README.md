@@ -1,9 +1,9 @@
 ## Card Match Pro
 This app aims to match ecommerce listings of Pokemon cards from sites like ebay, against card data from a specified database. 
 
-Front End: [AWS Amplify](https://main.dkd70x98t1182.amplifyapp.com/) or [Vercel](https://cardmatchpro-ryanlhy.vercel.app/)
-Back End: [PythonAnywhere](https://ryanlhy.pythonanywhere.com/)
-Back End GitHub: [Django Demo](https://github.com/ryanlhy/django-demo)
+- Front End: [AWS Amplify](https://main.dkd70x98t1182.amplifyapp.com/) or [Vercel](https://cardmatchpro-ryanlhy.vercel.app/)
+- Back End: [PythonAnywhere](https://ryanlhy.pythonanywhere.com/)
+- Back End GitHub: [Django Demo](https://github.com/ryanlhy/django-demo)
 
 This app utilizes the ebay API to extract the titles of the Pokemon card listings and then uses a simple algorithm to match and filter the ebay listings with the cards in your database by identifying specific keywords such as the card's name, set number and edition.
 
