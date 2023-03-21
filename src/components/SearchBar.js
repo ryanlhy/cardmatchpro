@@ -11,6 +11,15 @@ import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
 import { Paper } from '@mui/material';
 import { PropaneSharp } from '@mui/icons-material';
+import { Link } from "./../util/router";
+import { useRouter } from './../util/router';
+import { history } from './../util/router';
+
+
+function navigateToSearchPage(selectedQuery) {
+    const searchPath = `/search?q=${selectedQuery}`;
+    history.push(searchPath);
+}
 
 export default function FreeSolo(props) {
     const selectedValue = useSelector((state) => state.search.searchSelectedValue);
@@ -110,6 +119,7 @@ export default function FreeSolo(props) {
               dispatch(searchSelectedValue(label));
 
               setSearchOptions((searchOptions) => [ ...concatSearchOptions(label, id, gradingCompanies), ...searchOptions]);
+              navigateToSearchPage(label);
           }
       }
 
@@ -190,25 +200,25 @@ export default function FreeSolo(props) {
                 // <Grow in={true} style={{ transformOrigin: '0 0 0'}} 
                 //   {...(true ? {timeout:2000} : {})}>
                 <TextField
-                  {...params}
-                  onBlur={params.onBlur}
-                  label="Search input"
-                  // value={input} // display updated selected value
-                  InputProps={{
-                    ...params.InputProps,
-                    type: 'search',
-                  }}
-                  SelectProps={{
-                    native: true,
-                  }}
-                  // helperText="Please enter a pokemon name"
-                  onChange={handleSetInput}
-                  // variant="standard"
-                  >
+                {...params}
+                onBlur={params.onBlur}
+                label="Search input"
+                // value={input} // display updated selected value
+                InputProps={{
+                  ...params.InputProps,
+                  type: 'search',
+                }}
+                SelectProps={{
+                  native: true,
+                }}
+                // helperText="Please enter a pokemon name"
+                onChange={handleSetInput}
+                // variant="standard"
+                >
                     </TextField>
                       // </Grow>
-                  )}
-                  />
+                      )}
+                      />
                   </Paper>
                   {/* <IconButton type="button" sx={{ p: '10px' }} aria-label="search">
                     <SearchIcon />
