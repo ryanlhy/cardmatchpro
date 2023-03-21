@@ -13,7 +13,7 @@ import Grow from '@mui/material/Grow';
 import { Diversity1Sharp } from '@mui/icons-material';
 import BackgroundOverlay from './BackgroundOverlay';
 import { buttonGradeTags, displayFilteredCards, apiResponseData, isButtonFilterOn } from '../store/searchSlice';
-import { Link } from 'react-router-dom';
+import { Link } from "./../util/router";
 import CardEbay from './CardEbay';
 
 
@@ -99,71 +99,6 @@ export default function ActionAreaCard(props) {
       }
     } 
     return <CardEbay key={index} card={card} isShow={true}/>
-//     const handleOpen = () => {
-//       setOpen(true);
-//   };
-//   const handleClose = () => {
-//     setOpen(false);
-// };
-  
-    // return (
-    //     <Grow in={growCards} style={{ transformOrigin: '50% 100%'} } key={index}
-    //     {...(growCards ? {timeout:2000} : {})}>
-    //   <Card sx={{ maxWidth: 200, px:0, borderRadius:1, margin:1}} key={index}>
-    //     <CardActionArea sx={{}}>
-        
-    //       {/* position icon to top right and overlay image*/}
-    //       <CardMedia
-    //         component="img"
-    //         height="200"
-    //         image={changeImageAttribute(card.galleryURL[0], 250)}
-    //         alt="green iguana"
-    //         sx={{objectFit:'contain', borderRadius:1, border:1, borderColor:'black', borderStyle:'solid', position:'relative'}}
-    //         onClick={handleOpen}
-    //         />
-    //       {/* <Avatar sx={{position:'absolute', top:0, right:0, fill:'white', width:30, height:30,}}>
-    //         <FavoriteBorderIcon sx={{}}/>
-    //       </Avatar> */}
-    //       <CardContent>
-    //         <Typography gutterBottom variant="h7" component="div">
-    //           {card.title}
-    //         </Typography>
-    //         <Typography variant="body2" color="text.secondary">
-    //           {card.sellingStatus[0].currentPrice[0]['@currencyId']}: {card.sellingStatus[0].currentPrice[0].__value__}
-    //         </Typography>
-            
-    //         <Typography variant="body2" color="text.secondary">
-    //           {`${card.sellingStatus[0].bidCount ? 
-    //             `Bids: ${card.sellingStatus[0].bidCount}`: 'Fixed Price'}`}
-    //         </Typography>
-            
-    //         <Typography variant="body2" color="text.secondary">
-    //           Time Left: {card.sellingStatus[0].timeLeft}
-    //         </Typography >
-    //         <Typography variant="body2" color="text.secondary" component="a" href={card.viewItemURL[0]}>
-    //           See on ebay
-    //         </Typography>
-    //         {/* </Link> */}
-    //       </CardContent>
-    //       {/* <AddShoppingCartIcon sx={{position:'absolute', bottom:0, right:0, color:'black'}}/> */}
-    //     </CardActionArea>
-    //     <Modal
-    //       open={open}
-    //       onClose={handleClose}
-    //       style={{
-    //         display: 'flex',
-    //         alignItems: 'center',
-    //         justifyContent: 'center',
-    //         // bgColor: 'rgba(0, 0, 0, 0.5)',
-
-    //       }}
-    //     >
-    //       <img src={changeImageAttribute(card.galleryURL[0], 1000)} alt="Zoomed in image" />
-    //     </Modal>
-    //   </Card>
-    //       </Grow>
-    // );
-
   });
 
   return (
@@ -171,7 +106,7 @@ export default function ActionAreaCard(props) {
       {/* <Box sx={{justifyContent: 'center', display:'flex', zIndex: -1}}>
           <BackgroundOverlay/>
       </Box> */}
-      <Grid container spacing={5} sx={{mx:'auto', opacity:0.5}} >
+      <Grid container spacing={1} sx={{mx:'auto', opacity:0.5}} >
         
       {/* skeleton loading animation */}
       {loading ? 
