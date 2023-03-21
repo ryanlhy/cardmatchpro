@@ -117,7 +117,7 @@ export default function FreeSolo(props) {
               dispatch(searchSelectedValue(label));
 
               setSearchOptions((searchOptions) => [ ...concatSearchOptions(label, id, gradingCompanies), ...searchOptions]);
-              navigateToSearchPage(label);
+              setTimeout(() => navigateToSearchPage(label),2000);
           }
       }
 
@@ -171,8 +171,14 @@ export default function FreeSolo(props) {
     return (
       <Container maxWidth={props.maxWidth} sx={{}}>
         <Grow in={show} style={{ transformOrigin: '50% 100% 0'}} 
-        {...( {timeout:2000} )}>
-          <Stack spacing={2} mx='auto' sx={{ width: "70%", paddingTop: 0, marginTop: displayTop? 0 : 40}} >
+        // {...( {timeout:2000} )}
+        timeout={2000}
+        >
+          <Stack spacing={2} mx='auto' sx={{ width: "70%", paddingTop: 0, 
+          // marginTop: displayTop? 0 : 40,
+          marginTop: 0,
+
+          }} >
           {/* <div>selectedValue: {selectedValue}</div>
           <div>input: {input}</div> */}
           <Paper
