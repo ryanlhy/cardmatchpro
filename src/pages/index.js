@@ -22,13 +22,13 @@ function IndexPage(props) {
       <ThemeProvider>
       {/* <BackgroundOverlay/> */}
       <Logo/>
-      <FreeSolo maxWidth="md" />
-      <SearchTagSection/>
+      <FreeSolo maxWidth="md"  />
+      {/* <SearchTagSection/> */}
       </ThemeProvider>
       {/* <DescreteSlider/> */}
       {/* <DataGridDemo/> */}
 
-      <ActionAreaCard/>
+      {/* <ActionAreaCard/> */}
       {/* <BackgroundImage/> */}
     </>
   );
