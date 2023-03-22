@@ -1,13 +1,14 @@
 import React from "react";
 import ActionAreaCard from "../components/Card";
 import FreeSolo from "../components/SearchBar";
+import SearchTagSection from "../components/SearchTagSection";
 import Meta from "./../components/Meta";
 
 function SearchPage(props) {
   return (
     <>
       <Meta title="Search" />
-      <div
+      {/* <div
         style={{
           padding: "50px",
           width: "100%",
@@ -15,8 +16,9 @@ function SearchPage(props) {
         }}
       >
         This is the <code>{props.location.pathname}</code> page
-      </div>
+      </div> */}
       <FreeSolo/>
+      <SearchTagSection/>
       <ActionAreaCard/>
     </>
   );
