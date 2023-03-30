@@ -63,7 +63,7 @@ export default function CardEbay(props) {
   );
   // const indexProps = props.key
   const cardProps = props.card;
-  console.log(cardProps);
+  // console.log(props);
 
   const handleOpen = () => {
     setOpen(true);
@@ -111,7 +111,6 @@ export default function CardEbay(props) {
         ${hours}h${hours !== 1 ? "" : ""}, 
         ${minutes}m${minutes !== 1 ? "" : ""}`;
   }
-
   return (
     <Grow
       in={isShow}
@@ -128,7 +127,10 @@ export default function CardEbay(props) {
           <CardMedia
             component="img"
             height="200"
-            image={changeImageAttribute(cardProps.galleryURL[0], 250)}
+            image={
+              changeImageAttribute(cardProps.galleryURL[0], 250) ||
+              props.selectedImage.small // back up image
+            }
             alt={cardProps.title}
             sx={{
               objectFit: "contain",
