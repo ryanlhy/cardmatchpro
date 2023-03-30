@@ -47,11 +47,6 @@ function Navbar(props) {
   const [menuState, setMenuState] = useState(null);
 
   const itemsInList = useSelector((state) => state.cart.list);
-  console.log(itemsInList);
-
-  useEffect(() => {
-    // update items in list
-  }, [itemsInList]);
 
   // Use inverted logo if specified
   // and we are in dark mode
