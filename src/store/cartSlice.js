@@ -1,22 +1,26 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from "@reduxjs/toolkit";
 
 export const cartSlice = createSlice({
-  name: 'CART',
+  name: "CART",
   initialState: {
     cart: 0,
-    watchlist: {}
+    watchlist: {},
+    list: [],
   },
   reducers: {
     addToCart: (state, action) => {
-      state.cart = action.payload
+      state.cart = action.payload;
     },
     addToWatchlist: (state, action) => {
-        state.watchlist = action.payload
-    }
-  }
-})
+      state.watchlist = action.payload;
+    },
+    addToList: (state, action) => {
+      state.list.push(action.payload);
+    },
+  },
+});
 
 // Action creators are generated for each case reducer function
-export const { addToCart, addToWatchlist } = cartSlice.actions
+export const { addToCart, addToWatchlist, addToList } = cartSlice.actions;
 
-export default cartSlice.reducer
+export default cartSlice.reducer;
