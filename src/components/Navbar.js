@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Container from "@material-ui/core/Container";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -21,9 +21,10 @@ import Section from "./Section";
 import { Link } from "./../util/router";
 import { useAuth } from "./../util/auth";
 import { useDarkMode } from "./../util/theme";
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Badge } from "@material-ui/core";
 import FreeSolo from "./SearchBar";
+import { useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   logo: {
@@ -44,6 +45,14 @@ function Navbar(props) {
   const darkMode = useDarkMode();
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [menuState, setMenuState] = useState(null);
+
+  const itemsInList = useSelector((state) => state.cart.list);
+  console.log(itemsInList);
+
+  useEffect(() => {
+    // update items in list
+  }, [itemsInList]);
+
   // Use inverted logo if specified
   // and we are in dark mode
   const logo =
@@ -141,14 +150,16 @@ function Navbar(props) {
               )}
 
               <IconButton
-              color="inherit"
-              style={{ opacity: 0.6 }}
-              component={Link} to="/dashboard">
-                <Badge badgeContent={21} color="primary">
+                color="inherit"
+                style={{ opacity: 0.6 }}
+                component={Link}
+                to="/dashboard"
+              >
+                <Badge badgeContent={itemsInList.length} color="primary">
                   <ShoppingCartIcon />
                 </Badge>
               </IconButton>
-            
+
               <IconButton
                 color="inherit"
                 onClick={darkMode.toggle}

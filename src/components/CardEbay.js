@@ -19,6 +19,7 @@ import {
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Grow from "@mui/material/Grow";
+import { addToList } from "../store/cartSlice";
 
 const useStyles = makeStyles((theme) => ({
   addToCartButton: {
@@ -58,9 +59,11 @@ export default function CardEbay(props) {
   const [isShow, setIsShow] = useState(showProps);
   const classes = useStyles();
 
+  const dispatch = useDispatch();
   const displayFilteredCard = useSelector(
     (state) => state.search.displayFilteredCards
   );
+
   // const indexProps = props.key
   const cardProps = props.card;
   // console.log(props);
@@ -111,6 +114,13 @@ export default function CardEbay(props) {
         ${hours}h${hours !== 1 ? "" : ""}, 
         ${minutes}m${minutes !== 1 ? "" : ""}`;
   }
+
+  // add selected item to list
+  const handleAddToList = (e) => {
+    console.log("added to list");
+    dispatch(addToList(cardProps));
+  };
+
   return (
     <Grow
       in={isShow}
@@ -184,7 +194,12 @@ export default function CardEbay(props) {
             sx={{ position: "absolute", bottom: 0, right: 0, color: "black" }}
           /> */}
         </CardActionArea>
-        <ButtonBase className={classes.addToCartButton}>ADD TO CART</ButtonBase>
+        <ButtonBase
+          className={classes.addToCartButton}
+          onClick={(e) => handleAddToList(e)}
+        >
+          ADD TO LIST
+        </ButtonBase>
 
         <Modal
           open={open}
