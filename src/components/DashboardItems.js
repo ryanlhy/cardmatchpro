@@ -18,6 +18,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import EditItemModal from "./EditItemModal";
 import { useAuth } from "./../util/auth";
 import { updateItem, deleteItem, useItemsByOwner } from "./../util/db";
+import { useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   paperItems: {
@@ -36,12 +37,12 @@ function DashboardItems(props) {
   const classes = useStyles();
 
   const auth = useAuth();
-
-  const {
-    data: items,
-    status: itemsStatus,
-    error: itemsError,
-  } = useItemsByOwner(auth.user.uid);
+  const items = useSelector((state) => state.cart.list);
+  // const {
+  //   data: items,
+  //   status: itemsStatus,
+  //   error: itemsError,
+  // } = useItemsByOwner(auth.user.uid);
 
   const [creatingItem, setCreatingItem] = useState(false);
 
@@ -63,11 +64,11 @@ function DashboardItems(props) {
 
   return (
     <>
-      {itemsError && (
+      {/* {itemsError && (
         <Box mb={3}>
           <Alert severity="error">{itemsError.message}</Alert>
         </Box>
-      )}
+      )} */}
 
       <Paper className={classes.paperItems}>
         <Box
@@ -88,7 +89,7 @@ function DashboardItems(props) {
         </Box>
         <Divider />
 
-        {(itemsStatus === "loading" || itemsAreEmpty) && (
+        {/* {(itemsStatus === "loading" || itemsAreEmpty) && (
           <Box py={5} px={3} align="center">
             {itemsStatus === "loading" && <CircularProgress size={32} />}
 
@@ -96,17 +97,18 @@ function DashboardItems(props) {
               <>Nothing yet. Click the button to add your first item.</>
             )}
           </Box>
-        )}
+        )} */}
 
-        {itemsStatus !== "loading" && items && items.length > 0 && (
+        {
+          // itemsStatus !== "loading" && items && items.length > 0 && (
           <List disablePadding={true}>
             {items.map((item, index) => (
               <ListItem
-                key={index}
+                key={index.itemId}
                 divider={index !== items.length - 1}
                 className={item.featured ? classes.featured : ""}
               >
-                <ListItemText>{item.name}</ListItemText>
+                <ListItemText>{item.title}</ListItemText>
                 <ListItemSecondaryAction>
                   <IconButton
                     edge="end"
@@ -134,7 +136,8 @@ function DashboardItems(props) {
               </ListItem>
             ))}
           </List>
-        )}
+          // )
+        }
       </Paper>
 
       {creatingItem && <EditItemModal onDone={() => setCreatingItem(false)} />}
