@@ -63,15 +63,16 @@ export default function CardEbay(props) {
   const showProps = props.isShow;
   const [open, setOpen] = useState(false);
   const [show, setShow] = useState(true);
-  const [addedToList, setAddedToList] = useState(false);
   const [isShow, setIsShow] = useState(showProps);
   const classes = useStyles();
 
   const dispatch = useDispatch();
-  const displayFilteredCard = useSelector(
-    (state) => state.search.displayFilteredCards
-  );
 
+  // check if the card is already in the list
+  const list = useSelector((state) => state.cart.list);
+  const [addedToList, setAddedToList] = useState(
+    list.some((item) => item.itemId[0] === props.card.itemId[0])
+  );
   const cardProps = props.card;
 
   const handleOpen = () => {
