@@ -19,7 +19,7 @@ import {
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Grow from "@mui/material/Grow";
-import { addToList } from "../store/cartSlice";
+import { addToList, removeFromList } from "../store/cartSlice";
 
 const useStyles = makeStyles((theme) => ({
   addToCartButton: {
@@ -32,6 +32,8 @@ const useStyles = makeStyles((theme) => ({
     height: "40px",
     margin: "10px",
     display: "none", // hide the button by default
+    // opacity: 0, // hide the button by default
+    // alignSelf: "flex-end",
   },
   card: {
     "&:hover $addToCartButton": {
@@ -41,13 +43,18 @@ const useStyles = makeStyles((theme) => ({
     px: 0,
     borderRadius: 1,
     margin: "9px",
+    // display: "flex",
+    // // flexWrap: "wrap",
+    // flexDirection: "column",
+    // // alignContent: "space-between",
   },
   cardTitle: {
-    maxHeight: "5em",
+    // maxHeight: "5em",
+    minHeight: "5em",
     overflow: "hidden",
     textOverflow: "ellipsis",
     display: "-webkit-box",
-    "-webkit-line-clamp": 3,
+    "-webkit-line-clamp": 4,
     "-webkit-box-orient": "vertical",
   },
 }));
@@ -56,6 +63,7 @@ export default function CardEbay(props) {
   const showProps = props.isShow;
   const [open, setOpen] = useState(false);
   const [show, setShow] = useState(true);
+  const [addedToList, setAddedToList] = useState(false);
   const [isShow, setIsShow] = useState(showProps);
   const classes = useStyles();
 
@@ -64,9 +72,7 @@ export default function CardEbay(props) {
     (state) => state.search.displayFilteredCards
   );
 
-  // const indexProps = props.key
   const cardProps = props.card;
-  // console.log(props);
 
   const handleOpen = () => {
     setOpen(true);
@@ -118,7 +124,14 @@ export default function CardEbay(props) {
   // add selected item to list
   const handleAddToList = (e) => {
     console.log("added to list");
+    setAddedToList(true);
     dispatch(addToList(cardProps));
+  };
+
+  const handleRemoveFromList = (e) => {
+    console.log("removed from list");
+    setAddedToList(false);
+    dispatch(removeFromList(cardProps));
   };
 
   return (
@@ -155,7 +168,7 @@ export default function CardEbay(props) {
           {/* <Avatar sx={{position:'absolute', top:0, right:0, fill:'white', width:30, height:30,}}>
                             <FavoriteBorderIcon sx={{}}/>
                           </Avatar> */}
-          <CardContent>
+          <CardContent sx={{}}>
             <Typography
               className={classes.cardTitle}
               gutterBottom
@@ -194,13 +207,21 @@ export default function CardEbay(props) {
             sx={{ position: "absolute", bottom: 0, right: 0, color: "black" }}
           /> */}
         </CardActionArea>
-        <ButtonBase
-          className={classes.addToCartButton}
-          onClick={(e) => handleAddToList(e)}
-        >
-          ADD TO LIST
-        </ButtonBase>
-
+        {addedToList ? (
+          <ButtonBase
+            className={classes.addToCartButton}
+            onClick={(e) => handleRemoveFromList(e)}
+          >
+            REMOVE
+          </ButtonBase>
+        ) : (
+          <ButtonBase
+            className={classes.addToCartButton}
+            onClick={(e) => handleAddToList(e)}
+          >
+            ADD TO LIST
+          </ButtonBase>
+        )}
         <Modal
           open={open}
           onClose={handleClose}

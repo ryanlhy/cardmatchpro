@@ -17,10 +17,16 @@ export const cartSlice = createSlice({
     addToList: (state, action) => {
       state.list.push(action.payload);
     },
+    removeFromList: (state, action) => {
+      state.list = state.list.filter(
+        (item) => item.itemId[0] !== action.payload.itemId[0]
+      );
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { addToCart, addToWatchlist, addToList } = cartSlice.actions;
+export const { addToCart, addToWatchlist, addToList, removeFromList } =
+  cartSlice.actions;
 
 export default cartSlice.reducer;
