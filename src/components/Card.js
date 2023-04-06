@@ -112,7 +112,6 @@ export default function ActionAreaCard(props) {
       pokemonArray.map((card, index) => {
         // remove cards that do not match strict filter, and display only cards that match exact filter
         if (displayFilteredCard.length !== 0) {
-          console.log("displayFilteredCard: ", displayFilteredCard);
           if (!displayFilteredCard.includes(card.itemId[0])) {
             // return <CardEbay key={index} card={card} isShow={false}/>;
             return null;
