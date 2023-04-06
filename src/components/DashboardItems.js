@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Box from "@material-ui/core/Box";
 import Alert from "@material-ui/lab/Alert";
 import Paper from "@material-ui/core/Paper";
@@ -18,7 +18,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import EditItemModal from "./EditItemModal";
 import { useAuth } from "./../util/auth";
 import { updateItem, deleteItem, useItemsByOwner } from "./../util/db";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { removeFromList } from "../store/cartSlice";
 
 const useStyles = makeStyles((theme) => ({
   paperItems: {
@@ -38,11 +39,16 @@ function DashboardItems(props) {
 
   const auth = useAuth();
   const items = useSelector((state) => state.cart.list);
+  const dispatch = useDispatch();
   // const {
   //   data: items,
   //   status: itemsStatus,
   //   error: itemsError,
   // } = useItemsByOwner(auth.user.uid);
+
+  useEffect(() => {
+    console.log(items);
+  }, [items]);
 
   const [creatingItem, setCreatingItem] = useState(false);
 
@@ -60,6 +66,12 @@ function DashboardItems(props) {
     } else {
       alert("You must upgrade to the pro or business plan to use this feature");
     }
+  };
+
+  const handleDeleteItem = (item) => {
+    // if (window.confirm("Are you sure you want to delete this item?")) {
+    dispatch(removeFromList(item));
+    // }
   };
 
   return (
@@ -104,7 +116,7 @@ function DashboardItems(props) {
           <List disablePadding={true}>
             {items.map((item, index) => (
               <ListItem
-                key={index.itemId}
+                key={item.itemId}
                 divider={index !== items.length - 1}
                 className={item.featured ? classes.featured : ""}
               >
@@ -128,7 +140,8 @@ function DashboardItems(props) {
                   <IconButton
                     edge="end"
                     aria-label="delete"
-                    onClick={() => deleteItem(item.id)}
+                    // onClick={() => deleteItem(item.id)}
+                    onClick={() => handleDeleteItem(item)}
                   >
                     <DeleteIcon />
                   </IconButton>
