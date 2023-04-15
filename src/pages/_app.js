@@ -17,6 +17,7 @@ import Footer from "./../components/Footer";
 import { AuthProvider } from "./../util/auth";
 import { ThemeProvider } from "./../util/theme";
 import SearchPage from "./search";
+import CartPage from "./cart";
 
 function App(props) {
   return (
@@ -52,6 +53,8 @@ function App(props) {
               <Route exact path="/purchase/:plan" component={PurchasePage} />
 
               <Route exact path="/search" component={SearchPage} />
+
+              <Route exact path="/cart" component={CartPage} />
 
               <Route
                 exact
