@@ -20,6 +20,8 @@ import { useAuth } from "./../util/auth";
 import { updateItem, deleteItem, useItemsByOwner } from "./../util/db";
 import { useSelector, useDispatch } from "react-redux";
 import { removeFromList } from "../store/cartSlice";
+import Container from "@material-ui/core/Container";
+import SectionHeader from "./SectionHeader";
 
 const useStyles = makeStyles((theme) => ({
   paperItems: {
@@ -46,10 +48,6 @@ function DashboardItems(props) {
   //   error: itemsError,
   // } = useItemsByOwner(auth.user.uid);
 
-  useEffect(() => {
-    console.log(items);
-  }, [items]);
-
   const [creatingItem, setCreatingItem] = useState(false);
 
   const [updatingItemId, setUpdatingItemId] = useState(null);
@@ -75,10 +73,11 @@ function DashboardItems(props) {
   };
 
   return (
-    <>
+    <Container>
+      <SectionHeader title="Your Cart" size={4} textAlign="center" />
       {/* {itemsError && (
         <Box mb={3}>
-          <Alert severity="error">{itemsError.message}</Alert>
+        <Alert severity="error">{itemsError.message}</Alert>
         </Box>
       )} */}
 
@@ -103,13 +102,13 @@ function DashboardItems(props) {
 
         {/* {(itemsStatus === "loading" || itemsAreEmpty) && (
           <Box py={5} px={3} align="center">
-            {itemsStatus === "loading" && <CircularProgress size={32} />}
-
-            {itemsStatus !== "loading" && itemsAreEmpty && (
-              <>Nothing yet. Click the button to add your first item.</>
+          {itemsStatus === "loading" && <CircularProgress size={32} />}
+          
+          {itemsStatus !== "loading" && itemsAreEmpty && (
+            <>Nothing yet. Click the button to add your first item.</>
             )}
-          </Box>
-        )} */}
+            </Box>
+          )} */}
 
         {
           // itemsStatus !== "loading" && items && items.length > 0 && (
@@ -161,7 +160,7 @@ function DashboardItems(props) {
           onDone={() => setUpdatingItemId(null)}
         />
       )}
-    </>
+    </Container>
   );
 }
 
