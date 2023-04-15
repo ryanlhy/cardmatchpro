@@ -50,10 +50,10 @@ const useStyles = makeStyles((theme) => ({
   },
   cardTitle: {
     // maxHeight: "5em",
-    minHeight: "5em",
+    minHeight: "4em",
     overflow: "hidden",
-    textOverflow: "ellipsis",
-    display: "-webkit-box",
+    textOverflow: "ellipsis", // add ellipsis if the text is too long to fit on one line
+    display: "-webkit-box", // enable the line-clamp property
     "-webkit-line-clamp": 4,
     "-webkit-box-orient": "vertical",
   },
@@ -178,7 +178,11 @@ export default function CardEbay(props) {
             >
               {cardProps.title}
             </Typography>
-            <Typography variant="body2" color="text.secondary">
+            <Typography
+              variant="body2"
+              color="text.secondary"
+              sx={{ fontWeight: "bold" }}
+            >
               {cardProps.sellingStatus[0].currentPrice[0]["@currencyId"]}:{" "}
               {cardProps.sellingStatus[0].currentPrice[0].__value__}
             </Typography>
