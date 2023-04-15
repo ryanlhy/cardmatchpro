@@ -28,6 +28,7 @@ import {
 } from "../store/searchSlice";
 import { Link } from "./../util/router";
 import CardEbay from "./CardEbay";
+import { callEbayApiSearch } from "../util/apiCalls";
 
 export default function ActionAreaCard(props) {
   const [pokemonArray, setPokemonArray] = useState([]);
@@ -62,20 +63,21 @@ export default function ActionAreaCard(props) {
       };
       console.log(paramsObj);
       let param = JSON.stringify(paramsObj);
-      const urlSrc = `https://ryanlhy.pythonanywhere.com/ebay/${param}`;
+      // const urlSrc = `https://ryanlhy.pythonanywhere.com/ebay/${param}`;
       // const urlSrc = `http://localhost:8000/ebay/${param}`;
       // const urlSrc = `http://localhost:8000/testparam/${param}`;
 
-      apiFunc(urlSrc);
+      apiFunc(param);
     }
   };
   // console.log(pokemonArray)
 
-  const apiFunc = async (urlSrc) => {
+  const apiFunc = async (param) => {
     const tempArray = pokemonArray; // temp array to reset if error
     try {
-      const response = await fetch(urlSrc);
-      const data = await response.json();
+      // const response = await fetch(urlSrc);
+      // const data = await response.json();
+      const data = await callEbayApiSearch(param);
       if (data.length !== 0 || data.data !== null) {
         console.log("data: ", data);
         setTimeout(() => {
@@ -117,7 +119,7 @@ export default function ActionAreaCard(props) {
             return null;
           }
         }
-        // console.log(selectedObj);
+        console.log(selectedObj);
         return (
           <CardEbay
             key={index}
