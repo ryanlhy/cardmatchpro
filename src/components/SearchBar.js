@@ -12,6 +12,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import { Paper } from "@mui/material";
 import { PropaneSharp } from "@mui/icons-material";
 import { history } from "./../util/router";
+import { callTenCharizard, callPokemonApiSearch } from "../util/apiCalls";
 
 function navigateToSearchPage(selectedQuery) {
   const searchPath = `/search?q=${selectedQuery}`;
@@ -32,7 +33,7 @@ export default function FreeSolo(props) {
   const [displayAdditionalOptions, setDisplayAdditionalOptions] =
     useState(false);
   const [callNewApi, setCallNewApi] = useState(true);
-  const [saveSearchObj, setSaveSearchObj] = useState([]);
+  const [saveSearchObj, setSaveSearchObj] = useState([]); // a precaution to save the search obj id
   const [show, setShow] = useState(true);
   const [displayTop, setDisplayTop] = useState(false);
   const pokeApiKey = process.env.pokeApiKey;
@@ -41,67 +42,50 @@ export default function FreeSolo(props) {
   const gradingCompanies = [];
 
   console.log(pokemonArray);
-  console.log(saveSearchObj);
-  const callTenCharizard = async () => {
-    const urlSrc = `https://api.pokemontcg.io/v2/cards?q=name:"*charizard*"&pageSize=10&api_key=${pokeApiKey}`;
-    apiFunc(urlSrc);
+  // console.log(saveSearchObj);
+  // console.log(searchOptions);
+
+  const settingPokemonData = (data) => {
+    console.log(data);
+    setPokemonArray(data);
+    setSearchOptions((prevSearchOptions) =>
+      [
+        ...prevSearchOptions,
+        ...data.map((arr, index) => handleAccessProps(arr, index)),
+      ]
+        .filter(
+          (option, index, options) =>
+            options.findIndex((o) => o.id === option.id) === index
+        )
+        .slice(0, 100)
+    );
   };
 
-  const callApiSearch = async () => {
-    if (input === "") {
-      console.log("did not call api from search");
-    } else {
-      // reset at every search query
-      let pageSize = 10;
-      // const urlSrc = `https://api.pokemontcg.io/v2/cards?q=name:"*${input}*"&pageSize=${pageSize}&api_key=${pokeApiKey}`;
-      // const urlSrc = `https://api.pokemontcg.io/v2/cards?q=name:"*${input}*"&pageSize=${pageSize}&api_key=${pokeApiKey}`;
-      // const urlSrc = `http://localhost:8000/pokemon/${input}`;
-      const urlSrc = `https://ryanlhy.pythonanywhere.com/pokemon/${input}`;
-
-      apiFunc(urlSrc);
-      console.log(urlSrc);
-    }
-    // when a space is entered into search bar, add a * to the search query before the word
-    // if dont return any pokemon, enter set name?
-  };
-
-  const apiFunc = async (urlSrc) => {
+  const apiCall = async (apiCallFunction, input) => {
     const tempArray = pokemonArray; // temp array to reset if error
+
     try {
-      const response = await fetch(urlSrc);
-      const data = await response.json();
-      if (data.data.length !== 0) {
-        setPokemonArray(data.data);
-        setSearchOptions((prevSearchOptions) =>
-          [
-            ...prevSearchOptions,
-            ...data.data.map((arr, index) => handleAccessProps(arr, index)),
-          ]
-            .filter(
-              (option, index, options) =>
-                options.findIndex((o) => o.id === option.id) === index
-            )
-            .slice(0, 100)
-        ); // filter to remove duplicate options, extract first 100 with slice
-      }
+      let data = await apiCallFunction(input);
+      settingPokemonData(data.data);
     } catch (err) {
       console.log("Error: ", err);
-      setPokemonArray(tempArray);
+
       setSearchOptions(
         tempArray.map((arr, index) => handleAccessProps(arr, index))
       );
     }
   };
 
+  console.log(input);
   useEffect(() => {
-    console.log(inputIsSelected);
     // check if empty array, dont procees with useEffect
-    if (input === "" && callNewApi === true) {
-      callTenCharizard();
+    if (input.length === 0 && callNewApi === true) {
+      console.log("callTenCharizard");
+      apiCall(callTenCharizard, input);
     } else {
-      // check if there is space in input
-      if (callNewApi === true)
-        callApiSearch(); /// this will create a new pokemon array
+      console.log("callPokemonApiSearch");
+      if (callNewApi === true) apiCall(callPokemonApiSearch, input);
+      /// this will create a new pokemon array
       else console.log("callNewApi: " + callNewApi);
     }
   }, [input]);
@@ -161,16 +145,19 @@ export default function FreeSolo(props) {
 
   const handleSetInput = (e) => {
     setInput(e.target.value);
+    // if input is smaller than the selected value, then call api
     if (selectedValue.length < input.length) {
-      setCallNewApi(true);
+      // setCallNewApi(true);
       // setInputIsSelected(false);
     }
     // find obj of the selected value for id later
     const selectedObjId = searchOptions.filter((p) => {
       // handlesetinput only activates when a key is pressed after arrowing down via keyboard
+      // compare before and after the last character
       return (
         p.label === e.target.value.slice(0, -1) ||
-        p.label.slice(0, -1) === e.target.value
+        p.label.slice(0, -1) === e.target.value ||
+        p.label === e.target.value
       );
     });
     setSaveSearchObj(selectedObjId);
@@ -184,7 +171,7 @@ export default function FreeSolo(props) {
       setShow(true);
     }, 2000);
   };
-  console.log(selectedValue);
+  // console.log(selectedValue);
 
   // searchbar -> card.call api -> card .. map
   return (
