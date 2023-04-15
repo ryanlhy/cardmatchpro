@@ -148,7 +148,7 @@ function Navbar(props) {
                 color="inherit"
                 style={{ opacity: 0.6 }}
                 component={Link}
-                to="/dashboard"
+                to="/cart"
               >
                 <Badge badgeContent={itemsInList.length} color="primary">
                   <ShoppingCartIcon />
