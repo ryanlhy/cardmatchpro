@@ -5,11 +5,14 @@ import Button from "@material-ui/core/Button";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { useForm } from "react-hook-form";
 import { useAuth } from "./../util/auth";
+import { saveEmail } from "../store/userSlice";
+import { useSelector, useDispatch } from "react-redux";
 
 function AuthForm(props) {
   const auth = useAuth();
   const [pending, setPending] = useState(false);
   const { handleSubmit, register, errors, getValues } = useForm();
+  const dispatch = useDispatch();
 
   const submitHandlersByType = {
     signin: ({ email, pass }) => {
@@ -48,6 +51,8 @@ function AuthForm(props) {
 
   // Handle form submission
   const onSubmit = ({ email, pass }) => {
+    console.log("onSubmit", email, pass);
+    dispatch(saveEmail(email)); // Save email to store
     // Show pending indicator
     setPending(true);
 

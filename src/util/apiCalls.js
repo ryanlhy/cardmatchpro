@@ -34,3 +34,29 @@ export const callEbayApiSearch = async (param) => {
   console.log(data);
   return data;
 };
+
+export const saveCustomerDB = async (customerData) => {
+  try {
+    const response = await fetch(
+      // "https://ryanlhy.pythonanywhere.com/employees/create/",
+      // "https://ryanlhy.pythonanywhere.com/employees/5/",
+
+      "http://localhost:8000/customer/",
+      {
+        // method: "PUT",
+        method: "POST",
+        // method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(customerData),
+      }
+    );
+    const data = await response.json();
+    console.log("Success:", data);
+    return "Success", data;
+  } catch (error) {
+    console.error("Error:", error);
+    return "Error", error;
+  }
+};

@@ -32,6 +32,9 @@ import { useUser, createUser, updateUser } from "./db";
 import { history } from "./router";
 import PageLoader from "./../components/PageLoader";
 import { getFriendlyPlanId } from "./prices";
+import { useDispatch } from "react-redux";
+import { saveCustomerDB } from "./apiCalls";
+import { saveEmail, saveUId } from "../store/userSlice";
 
 // Whether to merge extra user data from database into `auth.user`
 const MERGE_DB_USER = true;
@@ -54,6 +57,7 @@ export function AuthProvider({ children }) {
 // Hook that creates the `auth` object and handles state
 // This is called from `AuthProvider` above (extracted out for readability)
 function useAuthProvider() {
+  const dispatch = useDispatch();
   // Store auth user in state
   // `user` will be object, `null` (loading) or `false` (logged out)
   const [user, setUser] = useState(null);
@@ -74,9 +78,18 @@ function useAuthProvider() {
     // Ensure Firebase user is ready before we continue
     await waitForFirebase(user.uid);
 
+    // add to redux user store, double checking purpose?
+    dispatch(saveEmail(user.email));
+    dispatch(saveUId(user.uid));
+
     // Create the user in the database if they are new
     if (isNewUser) {
       await createUser(user.uid, { email: user.email });
+      console.log("saving customer db");
+      saveCustomerDB({
+        email: user.email,
+        uid: user.uid,
+      });
       // Send email verification if enabled
       if (EMAIL_VERIFICATION) {
         sendEmailVerification(auth.currentUser);
