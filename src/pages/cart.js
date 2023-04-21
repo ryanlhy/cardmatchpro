@@ -3,14 +3,14 @@ import Meta from "./../components/Meta";
 import DashboardSection from "./../components/DashboardSection";
 import { requireAuth } from "./../util/auth";
 import DashboardItems from "../components/DashboardItems";
-import TestForm from "../components/TestForm";
+// import TestForm from "../components/TestForm";
 
 function CartPage(props) {
   console.log("CartPage props", props);
   return (
     <>
       <Meta title="Dashboard" />
-      <TestForm />
+      {/* <TestForm /> */}
       <DashboardItems />
     </>
   );
