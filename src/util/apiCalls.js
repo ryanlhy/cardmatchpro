@@ -40,8 +40,9 @@ export const saveCustomerDB = async (customerData) => {
     const response = await fetch(
       // "https://ryanlhy.pythonanywhere.com/employees/create/",
       // "https://ryanlhy.pythonanywhere.com/employees/5/",
+      "https://ryanlhy.pythonanywhere.com/customer/",
 
-      "http://localhost:8000/customer/",
+      // "http://localhost:8000/customer/",
       {
         // method: "PUT",
         method: "POST",

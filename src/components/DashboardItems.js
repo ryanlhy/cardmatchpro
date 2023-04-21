@@ -121,21 +121,21 @@ function DashboardItems(props) {
               >
                 <ListItemText>{item.title}</ListItemText>
                 <ListItemSecondaryAction>
-                  <IconButton
+                  {/* <IconButton
                     edge="end"
                     aria-label="star"
                     onClick={() => handleStarItem(item)}
                     className={item.featured ? classes.starFeatured : ""}
                   >
                     <StarIcon />
-                  </IconButton>
-                  <IconButton
+                  </IconButton> */}
+                  {/* <IconButton
                     edge="end"
                     aria-label="update"
                     onClick={() => setUpdatingItemId(item.id)}
                   >
                     <EditIcon />
-                  </IconButton>
+                  </IconButton> */}
                   <IconButton
                     edge="end"
                     aria-label="delete"
