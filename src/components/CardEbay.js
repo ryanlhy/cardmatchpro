@@ -20,6 +20,7 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Grow from "@mui/material/Grow";
 import { addToList, removeFromList } from "../store/cartSlice";
+import { addItemToDB } from "../util/apiCalls";
 
 const useStyles = makeStyles((theme) => ({
   addToCartButton: {
@@ -32,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
     height: "40px",
     margin: "10px",
     display: "none", // hide the button by default
+    margin: "auto", // center contents
     // opacity: 0, // hide the button by default
     // alignSelf: "flex-end",
   },
@@ -127,6 +129,9 @@ export default function CardEbay(props) {
     console.log("added to list");
     setAddedToList(true);
     dispatch(addToList(cardProps));
+    addItemToDB(cardProps);
+    console.log(cardProps);
+    console.log(list);
   };
 
   const handleRemoveFromList = (e) => {

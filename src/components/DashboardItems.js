@@ -22,6 +22,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { removeFromList } from "../store/cartSlice";
 import Container from "@material-ui/core/Container";
 import SectionHeader from "./SectionHeader";
+import { getCartItemById, deleteItemsDB } from "../util/apiCalls";
 
 const useStyles = makeStyles((theme) => ({
   paperItems: {
@@ -40,7 +41,27 @@ function DashboardItems(props) {
   const classes = useStyles();
 
   const auth = useAuth();
-  const items = useSelector((state) => state.cart.list);
+  const itemsData = useSelector((state) => state.cart.list);
+  const [items, setItems] = useState(itemsData);
+  console.log(items);
+  console.log(itemsData);
+  async function getData() {
+    const itemDB = await getCartItemById(3);
+
+    return itemDB;
+  }
+  useEffect(() => {
+    getData().then((itemDB) => {
+      // const filteredItems = itemDB.filter((item) => {
+      //   return item.itemId[0] !== itemDB.ebay_item_number;
+      // });
+      // setItems(...filteredItems, ...itemDB);
+      // setItems(filteredItems);
+      setItems(itemDB);
+    });
+  }, []);
+
+  // TODO: to check if items tally with the cart in db
   const dispatch = useDispatch();
   // const {
   //   data: items,
@@ -69,6 +90,9 @@ function DashboardItems(props) {
   const handleDeleteItem = (item) => {
     // if (window.confirm("Are you sure you want to delete this item?")) {
     dispatch(removeFromList(item));
+    console.log(item);
+    deleteItemsDB(item.id);
+
     // }
   };
 
@@ -119,7 +143,7 @@ function DashboardItems(props) {
                 divider={index !== items.length - 1}
                 className={item.featured ? classes.featured : ""}
               >
-                <ListItemText>{item.title}</ListItemText>
+                <ListItemText>{item.title || item.name}</ListItemText>
                 <ListItemSecondaryAction>
                   {/* <IconButton
                     edge="end"

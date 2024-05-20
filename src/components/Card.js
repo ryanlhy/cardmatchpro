@@ -108,8 +108,8 @@ export default function ActionAreaCard(props) {
   console.log(pokemonArray);
 
   const ebayCards =
-    pokemonArray === null ? (
-      <Stack>No results</Stack>
+    pokemonArray === null || pokemonArray.length === 0 ? (
+      <Stack>Loading...</Stack>
     ) : (
       pokemonArray.map((card, index) => {
         // remove cards that do not match strict filter, and display only cards that match exact filter
